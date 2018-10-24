@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/info_common_settings">
+
+        <!--<CheckBoxPreference-->
+        <!--android:key="night_mode"-->
+        <!--android:summary="应用夜间模式到整个应用"-->
+        <!--android:title="夜间模式" />-->
+        <CheckBoxPreference
+            android:key="key_lyric"
+            android:summary="@string/setting_lyric_des"
+            android:title="@string/setting_lyric" />
+
+        <SwitchPreference
+            android:key="key_timing"
+            android:title="@string/setting_timing" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="wifi_mode"
+            android:summary="@string/pref_title_wifi_summary"
+            android:title="@string/pref_title_wifi" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_data_sync">
+
+        <PreferenceScreen
+            android:key="key_cache"
+            android:title="@string/pref_title_clear" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
