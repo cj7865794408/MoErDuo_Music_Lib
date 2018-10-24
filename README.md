@@ -11,7 +11,7 @@
 	}
 -Step 2. Add the dependency
 
-dependencies {
+	dependencies {
 	        implementation 'com.github.cj7865794408:MoErDuo_Music_Lib:v1.0'
 	}
 # 更新日志
