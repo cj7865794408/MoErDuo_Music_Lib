@@ -40,7 +40,8 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.1.2'
     api fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-//    api(name: 'musicapi-release', ext: 'aar')
+
+    //    api(name: 'musicapi-release', ext: 'aar')
     api 'com.android.support:multidex:1.0.1'
     api "com.android.support:design:$support_version"
     api "com.android.support:appcompat-v7:$support_version"

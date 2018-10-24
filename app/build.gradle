@@ -68,6 +68,7 @@ dependencies {
     api "com.android.support:support-v4:$support_version"
     api 'com.jcodecraeer:xrecyclerview:1.2.7'
     api 'com.android.support:multidex:1.0.1'
+
     //
 
     //RxJava and RxAndroid
@@ -132,10 +133,10 @@ dependencies {
     //Eventbus
     api 'org.greenrobot:eventbus:3.1.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-
     api 'com.danikula:videocache:2.7.1'
-    api(name: 'musiclibrary-release', ext: 'aar')
+//    api(name: 'musiclibrary-release', ext: 'aar')
+//    api(name: 'musicapi-release', ext: 'aar')
 
-        api (name:'musicapi-release', ext:'aar')
-//    implementation project(':musiclibrary')
+    //    implementation project(':musiclibrary')
+    implementation project(':musiclibrary')
 }
