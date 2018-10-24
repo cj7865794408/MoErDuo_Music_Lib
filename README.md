@@ -1,6 +1,19 @@
 #
 - 磨耳朵播放器
 
+-Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+-Step 2. Add the dependency
+
+dependencies {
+	        implementation 'com.github.cj7865794408:MoErDuo_Music_Lib:v1.0'
+	}
 # 更新日志
 
 ## v2.0.0
