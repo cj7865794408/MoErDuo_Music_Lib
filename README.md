@@ -5,8 +5,13 @@
 
 	allprojects {
 		repositories {
-			...
-			maven { url 'https://jitpack.io' }
+			 google()
+       			 jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        maven { url 'https://jitpack.io' }
 		}
 	}
 	
