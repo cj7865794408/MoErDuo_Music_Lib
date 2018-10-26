@@ -321,11 +321,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                 .subscribe { granted ->
                     if (granted!!) {
                         initPlayData()
-                    } else {
-                        Snackbar.make(wel_container, resources.getString(R.string.permission_hint),
-                                Snackbar.LENGTH_INDEFINITE)
-                                .setAction(resources.getString(R.string.sure)) { checkPermissionAndThenLoad() }.show()
-                    }
+                    } else Snackbar.make(wel_container, resources.getString(R.string.permission_hint),
+                            Snackbar.LENGTH_INDEFINITE)
+                            .setAction(resources.getString(R.string.sure)) { checkPermissionAndThenLoad() }.show()
                 }
     }
 
