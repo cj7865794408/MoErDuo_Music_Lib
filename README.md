@@ -24,7 +24,7 @@
 	
 	
 	dependencies {
-	        implementation 'com.github.cj7865794408:MoErDuo_Music_Lib:v1.0'
+	        implementation 'com.github.cj7865794408:MoErDuo_Music_Lib:v2.5'
 	}
 
 # 更新日志
