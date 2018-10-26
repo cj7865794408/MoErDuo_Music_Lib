@@ -1,7 +1,7 @@
 package com.cyl.musicapi.playlist
 
 
-import com.cyl.musicapi.TypedInput
+import com.cyl.musiclake.bean.TypedInput
 import io.reactivex.Observable
 import okhttp3.ResponseBody
 import retrofit2.http.*

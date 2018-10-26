@@ -1,10 +1,10 @@
 package com.cyl.musiclake.api
 
-import com.cyl.musicapi.ApiToJson
 import com.cyl.musicapi.playlist.ErrorInfo
 import com.cyl.musicapi.playlist.MusicInfo
 import com.cyl.musicapi.playlist.PlaylistApiService
 import com.cyl.musicapi.playlist.PlaylistInfo
+import com.cyl.musiclake.ApiToJson
 import com.cyl.musiclake.MusicApp
 import com.cyl.musiclake.bean.Music
 import com.cyl.musiclake.bean.Playlist

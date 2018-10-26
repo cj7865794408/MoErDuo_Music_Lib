@@ -1,7 +1,9 @@
-package com.cyl.musicapi;
+package com.cyl.musiclake;
 
 
 import android.text.TextUtils;
+
+import com.cyl.musiclake.bean.TypedInput;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 public class ApiToJson {
 
-    public static TypedInput getNewParmData(String paramKey,Object paramData, String apiName) {
+    public static TypedInput getNewParmData(String paramKey, Object paramData, String apiName) {
 
 
         return getParmData(new String[]{paramKey},new Object[]{paramData},apiName);

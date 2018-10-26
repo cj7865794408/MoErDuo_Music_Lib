@@ -1,11 +1,10 @@
 package com.cyl.musicapi
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.webkit.JavascriptInterface
-import android.widget.Toast
 import com.cyl.musicapi.bean.*
+import com.cyl.musiclake.AjaxHandler
 import com.google.gson.Gson
 import org.json.JSONObject
 import wendu.dsbridge.CompletionHandler
