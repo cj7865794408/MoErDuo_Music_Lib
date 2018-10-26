@@ -63,6 +63,18 @@ public class SPUtils {
     }
 
     /**
+     * 保存服務器地址
+     *
+     * @param id
+     */
+    public static void setServiceId(String id) {
+        putAnyCommit("getServiceId", id);
+    }
+
+    public static String getServiceId() {
+        return getAnyByKey("getServiceId", "");
+    }
+    /**
      * 保存Token
      *
      * @param id

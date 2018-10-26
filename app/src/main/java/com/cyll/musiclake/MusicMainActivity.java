@@ -20,6 +20,7 @@ public class MusicMainActivity extends Activity {
         setContentView(textView);
         String token = "c3c1c3e31dd14f499caacb2d2b3aefea";
         String MEDStudentId = "bba5be2582ed4796bc00cc791521b9e5";
-        NavigationHelper.INSTANCE.navigateToPlaying(MusicMainActivity.this, null, token, MEDStudentId);
+        String url = "http://192.168.1.181:8050/ParentServer/";
+        NavigationHelper.INSTANCE.navigateToPlaying(MusicMainActivity.this, null, token, MEDStudentId, url);
     }
 }

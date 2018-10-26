@@ -41,7 +41,7 @@ public class Constants {
 
 //    public static final String NEW_BASE_URL = "https://api.p.ajia.cn/ParentServer/";
 
-    public static final String NEW_BASE_URL ="http://192.168.1.181:8050/ParentServer/";
+    public static  String NEW_BASE_URL ="http://192.168.1.181:8050/ParentServer/";
 
     public static final String QueryRadioAudioList = "QueryRadioAudioList"; //查询电台音频列表
 

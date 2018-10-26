@@ -34,7 +34,7 @@ object PlaylistApiServiceImpl {
         get() = UserStatus.getUserInfo(MusicApp.getAppContext()).token
 
     private val specaillistApiService: PlaylistApiService
-        get() = ApiManager.getInstance().create(PlaylistApiService::class.java, Constants.NEW_BASE_URL)
+        get() = ApiManager.getInstance().create(PlaylistApiService::class.java, SPUtils.getServiceId())
 
     //    private val MEDtoken: String
 //        get() = "ad75090d8de540dc985793f7529f6cd3"

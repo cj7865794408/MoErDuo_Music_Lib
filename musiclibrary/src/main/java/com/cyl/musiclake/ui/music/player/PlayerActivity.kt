@@ -334,20 +334,21 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
      */
     private fun initPlayData() {
         var sId = SPUtils.getPId()
+        var namid = intent.extras.getString("nameid")
+        var position = intent.extras.getInt("position")
+        if (namid != null) {
+            musicList = intent.extras.get("playList") as ArrayList<Music>
+        } else {
+            SPUtils.setXiaoJiaToken(intent.extras.getString("xj_token"))
+            SPUtils.setStudentId(intent.extras.getString("xj_sid"))
+            SPUtils.setServiceId(intent.extras.getString("xj_serviceid"))
+        }
+        if (SPUtils.getXiaoJiaToken() == null) {
+            ToastUtils.show("參數異常，token爲空！")
+            finish()
+            return
+        }
         if (sId != null && !TextUtils.isEmpty(sId)) {
-            var namid = intent.extras.getString("nameid")
-            var position = intent.extras.getInt("position")
-            if (namid != null) {
-                musicList = intent.extras.get("playList") as ArrayList<Music>
-            } else {
-                SPUtils.setXiaoJiaToken(intent.extras.getString("xj_token"))
-                SPUtils.setStudentId(intent.extras.getString("xj_sid"))
-            }
-            if (SPUtils.getXiaoJiaToken() == null) {
-                ToastUtils.show("參數異常，token爲空！")
-                finish()
-                return
-            }
             mPresenter?.getMusicListDB(SPUtils.getPId(), position, namid)
         } else
             mPresenter!!.loadSpeData(true)
