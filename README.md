@@ -1,6 +1,21 @@
 #
 - 磨耳朵播放器
 
+-project build
+
+ 	dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+   	 }
+	 
+-app bulid
+
+	apply plugin: 'com.github.dcendents.android-maven'
+	group = 'com.github.cj7865794408'
+	
+	
 -Add it in your root build.gradle at the end of repositories:
 
 	allprojects {
