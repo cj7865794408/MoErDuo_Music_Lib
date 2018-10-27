@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+﻿apply plugin: 'com.android.library'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -22,7 +22,7 @@ android {
 
     buildToolsVersion "27.0.3"
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 27
         versionCode 15
         versionName "4.1.3"

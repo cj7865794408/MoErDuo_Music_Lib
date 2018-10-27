@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+﻿apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'jar-gradle-plugin'
@@ -24,7 +24,7 @@ android {
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.cyll.musiclake"
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 27
         versionCode 15
         versionName "4.1.3"
