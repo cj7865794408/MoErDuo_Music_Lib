@@ -74,6 +74,7 @@ public class SPUtils {
     public static String getServiceId() {
         return getAnyByKey("getServiceId", "");
     }
+
     /**
      * 保存Token
      *
@@ -89,11 +90,11 @@ public class SPUtils {
 
 
     public static void setPid(String id) {
-        putAnyCommit("getContactsBeansId", id);
+        putAnyCommit("getContactsBeansId_" + getXiaoJiaToken(), id);
     }
 
     public static String getPId() {
-        return getAnyByKey("getContactsBeansId", "");
+        return getAnyByKey("getContactsBeansId_" + getXiaoJiaToken(), "");
     }
 
 //    public static void saveMusic_list(String id, ArrayList<Music> list) {

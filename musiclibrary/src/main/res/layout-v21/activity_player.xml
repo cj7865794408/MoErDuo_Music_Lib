@@ -81,7 +81,8 @@
                 android:layout_margin="@dimen/dp_16"
                 android:contentDescription="@string/search_lyric"
                 android:src="@drawable/ic_search_lyric"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/searchLyricIv_text"
@@ -197,7 +198,6 @@
                     app:materialIcon="skip_previous"
                     app:materialIconColor="@color/white"
                     app:materialIconSize="32dp"
-                    tools:targetApi="lollipop"
                     tools:ignore="VectorDrawableCompat" />
 
                 <ImageView
@@ -352,7 +352,8 @@
                     android:contentDescription="@string/equalizer"
                     android:gravity="center"
                     android:src="@drawable/ic_equalizer"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:ignore="VectorDrawableCompat" />
 
                 <net.steamcrafted.materialiconlib.MaterialIconView
                     android:id="@+id/playlistAddIv"

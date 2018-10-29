@@ -87,9 +87,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                 playingMusic?.let {
                     it.isLove = SongLoader.updateFavoriteSong(it)
                     if (it.isLove) {
-                        ToastUtils.show("收藏成功！")
+                        ToastUtils.showCenter("收藏成功！")
                     } else {
-                        ToastUtils.show("已取消收藏！")
+                        ToastUtils.showCenter("已取消收藏！")
                     }
                 }
             } else {
@@ -98,6 +98,10 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                 }
             }
         }
+    }
+
+    override fun hideLoading() {
+        super.hideLoading()
     }
 
     var aRadios: MutableList<SpecailRadioBean.DataBean>? = java.util.ArrayList()
@@ -187,7 +191,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                             radiosData = aRadios!![0].radios[0]
                     }
                 } else {
-                    ToastUtils.show("暂无任何电台！请联系客服人员！")
+                    ToastUtils.show("暂无任何电台！")
                     finish()
                 }
 
@@ -207,7 +211,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                         playlist!!.pid?.let { mPresenter!!.loadMusicList(it) }
                     }!!
                 } else {
-                    ToastUtils.show("暂无任何电台！请联系客服人员！")
+                    ToastUtils.show("暂无任何电台！")
                     finish()
                 }
             } else {
@@ -560,11 +564,16 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
             mLyricView?.setTextSize(40)
             mLyricView?.setHighLightTextColor(SPUtils.getFontColor())
             mLyricView?.setTouchable(true)
-            mLyricView?.setOnPlayerClickListener { progress, _ ->
-                PlayManager.seekTo(progress.toInt())
-                if (!PlayManager.isPlaying()) {
-                    PlayManager.playPause()
+            mLyricView?.setOnPlayerClickListener { progress, content ->
+                if (progress.toInt() == 0 && content == null) {
+                    viewPager.currentItem = 0
+                } else {
+                    PlayManager.seekTo(progress.toInt())
+                    if (!PlayManager.isPlaying()) {
+                        PlayManager.playPause()
+                    }
                 }
+
             }
         }
         mLyricView?.setLyricContent(lyric)
@@ -623,7 +632,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         }
         val mAdapter = MyPagerAdapter(viewPagerContent)
         viewPager.adapter = mAdapter
-        viewPager.setPageTransformer(false, DepthPageTransformer())
+        viewPager.setPageTransformer(true, DepthPageTransformer())
         viewPager.offscreenPageLimit = 2
         viewPager.currentItem = 0
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

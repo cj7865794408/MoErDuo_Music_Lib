@@ -119,8 +119,8 @@ public class SpecialActivity extends BaseActivity<OnlinePlaylistPresenter> imple
                     loadData.setRadioAudioCount(myAudioDataBean.getRadioAudios() == null ? 0 : myAudioDataBean.getRadioAudios().size());
                     loadData.setName(myAudioDataBean.getName());
                     loadData.setImg(myAudioDataBean.getTypeImg());
-                    loadData.setId("shoucang"+i+loadData.getName());
-                    if (myAudioDataBean.getRadioAudios() != null&&myAudioDataBean.getRadioAudios().size()>0) {
+                    loadData.setId("shoucang" + i + loadData.getName());
+                    if (myAudioDataBean.getRadioAudios() != null && myAudioDataBean.getRadioAudios().size() > 0) {
                         List<Music> mlIstanbul = new ArrayList<>();
                         for (int j = 0; j < myAudioDataBean.getRadioAudios().size(); j++) {
                             Music musicData = new Music();
@@ -210,7 +210,7 @@ public class SpecialActivity extends BaseActivity<OnlinePlaylistPresenter> imple
         itemPosition = event.getItemposition();
         if (event.getRadiosBean() == null) return;
         if (event.getRadiosBean().getRadioAudioCount() > 0) {
-            NavigationHelper.INSTANCE.navigateToMusicPlaying(this,null,event.getRadiosBean());
+            NavigationHelper.INSTANCE.navigateToMusicPlaying(this, null, event.getRadiosBean());
         }
     }
 
@@ -235,20 +235,20 @@ public class SpecialActivity extends BaseActivity<OnlinePlaylistPresenter> imple
         if (radios != null && radios.size() > 0) {
             for (int i = 0; i < radios.size(); i++) {
                 List<SpecailRadioBean.DataBean.RadiosBean> radiosBeanlsit = radios.get(i).getRadios();
-                    if (radiosBeanlsit != null) {
-                        for (int j = 0; j < radiosBeanlsit.size(); j++) {
-                            SpecailRadioBean.DataBean.RadiosBean radiosBean = radiosBeanlsit.get(j);
-                            if (SPUtils.getPId() != null&& SPUtils.getPId().equals(radiosBean.getId())) {
-                                if (PlayManager.isPlaying()) {
-                                    radiosBean.setCheck(true);
-                                } else {
-                                    radiosBean.setCheck(false);
-                                }
+                if (radiosBeanlsit != null) {
+                    for (int j = 0; j < radiosBeanlsit.size(); j++) {
+                        SpecailRadioBean.DataBean.RadiosBean radiosBean = radiosBeanlsit.get(j);
+                        if (SPUtils.getPId() != null && SPUtils.getPId().equals(radiosBean.getId())) {
+                            if (PlayManager.isPlaying()) {
+                                radiosBean.setCheck(true);
                             } else {
                                 radiosBean.setCheck(false);
                             }
+                        } else {
+                            radiosBean.setCheck(false);
                         }
                     }
+                }
             }
             specailAdapter.setNewData(radios);
         }

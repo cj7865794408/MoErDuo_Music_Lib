@@ -96,7 +96,7 @@ class PlayQueueDialog : BottomSheetDialogFragment(), PlayQueueContract.View {
             UIUtils.updatePlayMode(view as ImageView, true)
             tvPlayMode.text = PlayQueueManager.getPlayMode()
         }
-        guanbi_id.setOnClickListener { view -> dismiss() }
+        guanbi_id.setOnClickListener { dismiss() }
 //        clearAll.setOnClickListener { v ->
 //            MaterialDialog.Builder(context!!)
 //                    .title(R.string.playlist_queue_clear)
@@ -120,7 +120,7 @@ class PlayQueueDialog : BottomSheetDialogFragment(), PlayQueueContract.View {
                 R.id.iv_more -> {
                     PlayManager.removeFromQueue(position)
                     musicList = PlayManager.getPlayList()
-                    if (musicList.size == 0)
+                    if (musicList.isEmpty())
                         dismiss()
                     else
                         mAdapter!!.setNewData(musicList)

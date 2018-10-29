@@ -33,7 +33,6 @@ import android.view.animation.OvershootInterpolator;
 import com.cyl.musiclake.R;
 import com.cyl.musiclake.player.FloatLyricViewManager;
 import com.cyl.musiclake.utils.LogUtil;
-import com.cyl.musiclake.view.lyric.FloatLyricView;
 import com.cyl.musiclake.view.lyric.LyricInfo;
 import com.cyl.musiclake.view.lyric.LyricInfo.LineInfo;
 import com.cyl.musiclake.view.lyric.LyricParseUtils;
@@ -456,6 +455,12 @@ public class LyricView extends View {
             if (Math.abs(mVelocity) > THRESHOLD_Y_VELOCITY) {
                 doFlingAnimator(mVelocity);
                 return;
+            }
+            if(!mShowIndicator)
+            {
+                if (mClickListener != null) {
+                    mClickListener.onPlayerClicked(0,null);
+                }
             }
             if (mShowIndicator && clickPlayer(event)) {
                 if (mLineNumberUnderIndicator != mCurrentPlayLine) {

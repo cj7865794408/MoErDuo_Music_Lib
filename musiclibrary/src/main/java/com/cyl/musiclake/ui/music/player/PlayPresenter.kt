@@ -19,6 +19,7 @@ import com.cyl.musiclake.player.MusicPlayerService
 import com.cyl.musiclake.player.playback.PlayProgressListener
 import com.cyl.musiclake.utils.CoverLoader
 import com.cyl.musiclake.utils.ImageUtils
+import com.cyl.musiclake.utils.ToastUtils
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import javax.inject.Inject
@@ -32,44 +33,64 @@ class PlayPresenter @Inject
 constructor() : BasePresenter<PlayContract.View>(), PlayContract.Presenter, PlayProgressListener {
     override fun loadCollect(id: String?, state: Int?) {
         mView.showLoading()
-        val observable = PlaylistApiServiceImpl.StudentAddAudioToFavorite(id!!, state!!)
-        ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
-            override fun success(result: SpecailRadioBean) {
-                mView?.isCollect(result)
-            }
+        try {
+            val observable = PlaylistApiServiceImpl.StudentAddAudioToFavorite(id!!, state!!)
+            ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
+                override fun success(result: SpecailRadioBean) {
+                    mView?.isCollect(result)
+                }
 
-            override fun error(msg: String) {
-                mView.hideLoading()
-            }
-        })
+                override fun error(msg: String) {
+                    mView.hideLoading()
+                }
+            })
+        } catch (e: Throwable) {
+            mView.hideLoading()
+            ToastUtils.show("网络异常，请重新尝试!")
+            Log.e("loadCollect_error=", e.message)
+        }
+
     }
 
     override fun loadSpeData(getMyFavorite: Boolean?) {
         mView.showLoading()
-        val observable = PlaylistApiServiceImpl.QueryRadioList(getMyFavorite!!)
-        ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
-            override fun success(result: SpecailRadioBean) {
-                mView?.showList(result)
-            }
+        try {
+            val observable = PlaylistApiServiceImpl.QueryRadioList(getMyFavorite!!)
+            ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
+                override fun success(result: SpecailRadioBean) {
+                    mView?.showList(result)
+                }
 
-            override fun error(msg: String) {
-                mView.hideLoading()
-            }
-        })
+                override fun error(msg: String) {
+                    mView.hideLoading()
+                }
+            })
+        } catch (e: Throwable) {
+            mView.hideLoading()
+            ToastUtils.show("网络异常，请重新尝试!")
+            Log.e("loadSpeData_error=", e.message)
+        }
     }
 
     override fun loadMusicList(aId: String) {
         mView?.showLoading()
-        val observable = PlaylistApiServiceImpl.QueryRadioAudioList(aId!!)
-        ApiManager.request(observable, object : RequestCallBack<QueryRadioAudioListBean> {
-            override fun success(result: QueryRadioAudioListBean) {
-                mView?.showMusicList(result)
-            }
 
-            override fun error(msg: String) {
-                mView.hideLoading()
-            }
-        })
+        try {
+            val observable = PlaylistApiServiceImpl.QueryRadioAudioList(aId!!)
+            ApiManager.request(observable, object : RequestCallBack<QueryRadioAudioListBean> {
+                override fun success(result: QueryRadioAudioListBean) {
+                    mView?.showMusicList(result)
+                }
+
+                override fun error(msg: String) {
+                    mView.hideLoading()
+                }
+            })
+        } catch (e: Throwable) {
+            mView.hideLoading()
+            ToastUtils.show("网络异常，请重新尝试!")
+            Log.e("loadMusicList_error=", e.message)
+        }
     }
 
     override fun onProgressUpdate(position: Long, duration: Long) {
