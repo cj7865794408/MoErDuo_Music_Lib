@@ -1,4 +1,4 @@
-ï»¿apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'jar-gradle-plugin'
@@ -33,7 +33,7 @@ android {
         android.compileOptions.sourceCompatibility 1.8
         android.compileOptions.targetCompatibility 1.8
         ndk {
-            //è®¾ç½®æ”¯æŒçš„SOåº“æ¶æ„
+            //ÉèÖÃÖ§³ÖµÄSO¿â¼Ü¹¹
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
@@ -51,7 +51,7 @@ android {
 //    android.applicationVariants.all { variant ->
 //        variant.outputs.all { output ->
 //            def time = new Date().format("yyyy-MM-dd HHmmss", TimeZone.getTimeZone("GMT+08"))
-//            //è¿™é‡Œä¿®æ”¹apkæ–‡ä»¶å
+//            //ÕâÀïĞŞ¸ÄapkÎÄ¼şÃû
 //            outputFileName = "app-music_lake-${variant.name}-v${defaultConfig.versionCode}-${defaultConfig.versionName}-${time}.apk"
 //        }
 //    }
@@ -70,24 +70,24 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
-BuildJar{
-    //è¾“å‡ºç›®å½•
-    outputFileDir= project.buildDir.path+"/jar"
-    //è¾“å‡ºåŸå§‹jaråŒ…å
-    outputFileName="test.jar"
-    //è¾“å‡ºæ··æ·†jaråŒ…å
-    outputProguardFileName="test_proguard.jar"
-    //æ··æ·†é…ç½®
-    proguardConfigFile="proguard-rules.pro"
-    //æ˜¯å¦éœ€è¦é»˜è®¤çš„æ··æ·†é…ç½®proguard-android.txt
-    needDefaultProguard=false
-    applyMappingFile="originMapping/mapping.txt"
-    //ä¸éœ€è¦è¾“å‡ºjarçš„jaråŒ…åˆ—è¡¨,å¦‚['baidu.jar','baidu1.jar'...]
-    excludeJar=[]
-    //éœ€è¦è¾“å‡ºjarçš„åŒ…ååˆ—è¡¨,å½“æ­¤å‚æ•°ä¸ºç©ºæ—¶ï¼Œåˆ™é»˜è®¤å…¨é¡¹ç›®è¾“å‡º,æ”¯æŒå¤šåŒ…,å¦‚ includePackage=['com/adison/testjarplugin/include','com/adison/testjarplugin/include1'...]
-    includePackage=[]
-    //ä¸éœ€è¦è¾“å‡ºjarçš„ç±»ååˆ—è¡¨,å¦‚['baidu.calss','baidu1.class'...]
-    excludeClass=[]
-    //ä¸éœ€è¦è¾“å‡ºjarçš„åŒ…ååˆ—è¡¨,å¦‚ excludePackage=['com/adison/testjarplugin/exclude','com/adison/testjarplugin/exclude1'...]
-    excludePackage=[]
+BuildJar {
+    //Êä³öÄ¿Â¼
+    outputFileDir = project.buildDir.path + "/jar"
+    //Êä³öÔ­Ê¼jar°üÃû
+    outputFileName = "test.jar"
+    //Êä³ö»ìÏıjar°üÃû
+    outputProguardFileName = "test_proguard.jar"
+    //»ìÏıÅäÖÃ
+    proguardConfigFile = "proguard-rules.pro"
+    //ÊÇ·ñĞèÒªÄ¬ÈÏµÄ»ìÏıÅäÖÃproguard-android.txt
+    needDefaultProguard = false
+    applyMappingFile = "originMapping/mapping.txt"
+    //²»ĞèÒªÊä³öjarµÄjar°üÁĞ±í,Èç['baidu.jar','baidu1.jar'...]
+    excludeJar = []
+    //ĞèÒªÊä³öjarµÄ°üÃûÁĞ±í,µ±´Ë²ÎÊıÎª¿ÕÊ±£¬ÔòÄ¬ÈÏÈ«ÏîÄ¿Êä³ö,Ö§³Ö¶à°ü,Èç includePackage=['com/adison/testjarplugin/include','com/adison/testjarplugin/include1'...]
+    includePackage = []
+    //²»ĞèÒªÊä³öjarµÄÀàÃûÁĞ±í,Èç['baidu.calss','baidu1.class'...]
+    excludeClass = []
+    //²»ĞèÒªÊä³öjarµÄ°üÃûÁĞ±í,Èç excludePackage=['com/adison/testjarplugin/exclude','com/adison/testjarplugin/exclude1'...]
+    excludePackage = []
 }
