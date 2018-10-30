@@ -6,6 +6,7 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.view.WindowManager;
 
 import com.cyl.musicapi.BaseApiImpl;
@@ -78,11 +79,11 @@ public class MusicApp extends Application {
     private void initLogin() {
         mTencent = Tencent.createInstance(Constants.APP_ID, MusicApp.getAppContext());
     }
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(base);
-//        MultiDex.install(this);
-//    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     private HttpProxyCacheServer proxy;
 
     public static HttpProxyCacheServer getProxy(Context context) {

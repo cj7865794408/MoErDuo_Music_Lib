@@ -565,14 +565,15 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
             mLyricView?.setHighLightTextColor(SPUtils.getFontColor())
             mLyricView?.setTouchable(true)
             mLyricView?.setOnPlayerClickListener { progress, content ->
-                if (progress.toInt() == 0 && content == null) {
-                    viewPager.currentItem = 0
-                } else {
-                    PlayManager.seekTo(progress.toInt())
-                    if (!PlayManager.isPlaying()) {
-                        PlayManager.playPause()
-                    }
-                }
+                viewPager.currentItem = 0
+//                if (progress.toInt() == 0 && content == null) {
+//
+//                } else {
+//                    PlayManager.seekTo(progress.toInt())
+//                    if (!PlayManager.isPlaying()) {
+//                        PlayManager.playPause()
+//                    }
+//                }
 
             }
         }

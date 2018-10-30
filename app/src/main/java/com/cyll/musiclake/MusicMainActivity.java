@@ -16,15 +16,16 @@ public class MusicMainActivity extends Activity {
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(40);
         textView.setText("点击我，关闭应用");
-        textView.setOnClickListener(view -> finish());
-        setContentView(textView);
         String token = "c3c1c3e31dd14f499caacb2d2b3aefea";
         String MEDStudentId = "bba5be2582ed4796bc00cc791521b9e5";
         String url = "http://192.168.1.181:8050/ParentServer/";
+        textView.setOnClickListener(view -> NavigationHelper.INSTANCE.navigateToPlaying(MusicMainActivity.this, null, token, MEDStudentId, url));
+        setContentView(textView);
+
 //        String token = "659313cc775541849851a6681b9ea24f";
 //        String MEDStudentId = "30e9902ba7484682aa1bd152c6fe9338";
 //        String url = "http://test.api.p.ajia.cn:8080/ajiau-api/ParentServer/";
 
-        NavigationHelper.INSTANCE.navigateToPlaying(MusicMainActivity.this, null, token, MEDStudentId, url);
+//        NavigationHelper.INSTANCE.navigateToPlaying(MusicMainActivity.this, null, token, MEDStudentId, url);
     }
 }

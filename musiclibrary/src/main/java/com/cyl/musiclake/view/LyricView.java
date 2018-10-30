@@ -188,6 +188,7 @@ public class LyricView extends View {
         return super.dispatchTouchEvent(event);
     }
 
+    boolean touchFlag;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -198,12 +199,15 @@ public class LyricView extends View {
         mVelocityTracker.addMovement(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_CANCEL:
+                touchFlag = false;
                 actionCancel(event);
                 break;
             case MotionEvent.ACTION_DOWN:
+                touchFlag = false;
                 actionDown(event);
                 break;
             case MotionEvent.ACTION_MOVE:
+                touchFlag = true;
                 actionMove(event);
                 break;
             case MotionEvent.ACTION_UP:
@@ -229,9 +233,9 @@ public class LyricView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         if (scrollable()) {
-            if (mShowIndicator) {
-                drawIndicator(canvas);
-            }
+//            if (mShowIndicator) {
+//                drawIndicator(canvas);
+//            }
             for (int i = 0; i < mLineCount; i++) {
                 float x = 0;
                 switch (mTextAlign) {
@@ -456,21 +460,21 @@ public class LyricView extends View {
                 doFlingAnimator(mVelocity);
                 return;
             }
-            if(!mShowIndicator)
-            {
+
+            if (!touchFlag) {
                 if (mClickListener != null) {
-                    mClickListener.onPlayerClicked(0,null);
+                    mClickListener.onPlayerClicked(0, null);
                 }
             }
-            if (mShowIndicator && clickPlayer(event)) {
-                if (mLineNumberUnderIndicator != mCurrentPlayLine) {
-                    mShowIndicator = false;
-                    if (mClickListener != null) {
-                        setUserTouch(false);// 用户手指离开屏幕，取消触摸标记
-                        mClickListener.onPlayerClicked(mLyricInfo.songLines.get(mLineNumberUnderIndicator).start, mLyricInfo.songLines.get(mLineNumberUnderIndicator).content);
-                    }
-                }
-            }
+//            if (mShowIndicator && clickPlayer(event)) {
+//                if (mLineNumberUnderIndicator != mCurrentPlayLine) {
+//                    mShowIndicator = false;
+//                    if (mClickListener != null) {
+//                        setUserTouch(false);// 用户手指离开屏幕，取消触摸标记
+//                        mClickListener.onPlayerClicked(mLyricInfo.songLines.get(mLineNumberUnderIndicator).start, mLyricInfo.songLines.get(mLineNumberUnderIndicator).content);
+//                    }
+//                }
+//            }
         }
     }
 

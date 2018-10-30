@@ -14,7 +14,7 @@
         android:layout_height="128dp"
         android:layout_alignParentLeft="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/default_cover"
+        android:src="@drawable/book_bg_img_icon"
         tools:ignore="ContentDescription,RtlHardcoded" />
 
     <ImageButton
@@ -79,6 +79,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:background="#00000000"
+            android:visibility="gone"
             android:clickable="true"
             android:focusable="true"
             android:scaleType="fitXY"
