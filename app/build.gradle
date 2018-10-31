@@ -13,14 +13,6 @@ repositories {
 }
 
 android {
-    signingConfigs {
-        release {
-            keyAlias 'musiclake'
-            keyPassword '123123'
-            storeFile file('../app/musiclake.jks')
-            storePassword '123123'
-        }
-    }
     buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.cyll.musiclake"
@@ -38,13 +30,12 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-//            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
         debug {
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 //    android.applicationVariants.all { variant ->

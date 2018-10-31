@@ -23,8 +23,6 @@ import com.cyl.musiclake.utils.UpdateUtils;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.util.FileDownloadLog;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
 import com.tencent.tauth.Tencent;
 
 import org.litepal.LitePal;
@@ -64,7 +62,7 @@ public class MusicApp extends Application {
         LitePal.initialize(this);
         UpdateUtils.init(this);
         mTencent = Tencent.createInstance(Constants.APP_ID, this);
-        initBugly();
+//        initBugly();
         initLogin();
         initDB();
         registerListener();
@@ -108,13 +106,13 @@ public class MusicApp extends Application {
         FileDownloader.setup(this);
     }
 
-    /**
-     * 初始化bugly
-     */
-    private void initBugly() {
-        Bugly.init(getApplicationContext(), Constants.BUG_APP_ID, true);
-        Beta.checkUpgrade(false, false);
-    }
+//    /**
+//     * 初始化bugly
+//     */
+//    private void initBugly() {
+//        Bugly.init(getApplicationContext(), Constants.BUG_APP_ID, true);
+//        Beta.checkUpgrade(false, false);
+//    }
 
 
     /**

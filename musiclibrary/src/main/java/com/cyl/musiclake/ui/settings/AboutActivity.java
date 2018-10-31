@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -24,7 +25,6 @@ import com.cyl.musiclake.R2;
 import com.cyl.musiclake.base.BaseActivity;
 import com.cyl.musiclake.utils.Tools;
 import com.cyl.musiclake.view.FlipperView;
-import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,7 +72,7 @@ public class AboutActivity extends BaseActivity {
 
     @OnClick(R2.id.cardUpdateView)
     void toUpdate() {
-        Beta.checkUpgrade();
+//        Beta.checkUpgrade();
     }
 
     @Override
@@ -178,7 +178,7 @@ public class AboutActivity extends BaseActivity {
     private void animateRevealColorFromCoordinates(ViewGroup viewRoot, @ColorRes int color, int x, int y) {
         float finalRadius = (float) Math.hypot(viewRoot.getWidth(), viewRoot.getHeight());
 
-        Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, x, y, 0, finalRadius);
+        @SuppressLint({"NewApi", "LocalSuppress"}) Animator anim = ViewAnimationUtils.createCircularReveal(viewRoot, x, y, 0, finalRadius);
         viewRoot.setBackgroundColor(ContextCompat.getColor(this, color));
         anim.setDuration(1000);
         anim.setInterpolator(new AccelerateDecelerateInterpolator());
