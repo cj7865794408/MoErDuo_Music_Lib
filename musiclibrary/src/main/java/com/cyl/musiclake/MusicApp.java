@@ -23,7 +23,6 @@ import com.cyl.musiclake.utils.UpdateUtils;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.util.FileDownloadLog;
-import com.tencent.tauth.Tencent;
 
 import org.litepal.LitePal;
 
@@ -36,8 +35,8 @@ public class MusicApp extends Application {
     @SuppressLint("StaticFieldLeak")
     public static Context mContext;
 
-    //QQ第三方登录
-    public static Tencent mTencent;
+//    //QQ第三方登录
+//    public static Tencent mTencent;
 
     public static List<HotSearchBean> hotSearchList;
 
@@ -61,7 +60,7 @@ public class MusicApp extends Application {
         initApplicationComponent();
         LitePal.initialize(this);
         UpdateUtils.init(this);
-        mTencent = Tencent.createInstance(Constants.APP_ID, this);
+//        mTencent = Tencent.createInstance(Constants.APP_ID, this);
 //        initBugly();
         initLogin();
         initDB();
@@ -75,7 +74,7 @@ public class MusicApp extends Application {
     }
 
     private void initLogin() {
-        mTencent = Tencent.createInstance(Constants.APP_ID, MusicApp.getAppContext());
+//        mTencent = Tencent.createInstance(Constants.APP_ID, MusicApp.getAppContext());
     }
     @Override
     protected void attachBaseContext(Context base) {

@@ -241,6 +241,6 @@ fun logout() {
     UserStatus.saveuserstatus(MusicApp.getAppContext(), false)
     SPUtils.putAnyCommit(SPUtils.QQ_ACCESS_TOKEN, "")
     SPUtils.putAnyCommit(SPUtils.QQ_OPEN_ID, "")
-    MusicApp.mTencent.logout(MusicApp.getAppContext())
+//    MusicApp.mTencent.logout(MusicApp.getAppContext())
     EventBus.getDefault().post(LoginEvent(false, null))
 }
