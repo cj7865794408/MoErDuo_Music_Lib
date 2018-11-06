@@ -48,12 +48,6 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:src="@drawable/ic_search_lyric"
-                    android:tint="@color/colorPrimary" />
 
                 <TextView
                     android:layout_width="wrap_content"
