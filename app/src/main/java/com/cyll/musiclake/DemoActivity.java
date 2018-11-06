@@ -16,6 +16,6 @@
 ////        String token = "c3c1c3e31dd14f499caacb2d2b3aefea";
 ////        String MEDStudentId = "bba5be2582ed4796bc00cc791521b9e5";
 ////        String url = "http://192.168.1.181:8050/ParentServer/";
-////        NavigationHelper.INSTANCE.navigateToPlaying(this, null, token, MEDStudentId,url);
+//        NavigationHelper.INSTANCE.navigateToPlaying(this, null, token, MEDStudentId,url);
 //    }
 //}

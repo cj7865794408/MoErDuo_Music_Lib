@@ -59,6 +59,17 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         if (daoList != null)
             musicList = daoList as ArrayList<Music>
         if (musicList != null && musicList.size > 0) {
+            var positionNum = 0
+            if (ypId != null && !TextUtils.isEmpty(ypId)) {
+                for (k in 0 until musicList.size) {
+                    var music: Music = musicList[k]
+                    if (ypId.equals(music.mid)) {
+                        positionNum = k
+                    }
+                }
+            }
+            if (positionNum > 0)
+                SPUtils.setPlayPosition(positionNum)
             var index = SPUtils.getPlayPosition()
             if (index <= 0) {
                 index = 0
@@ -108,6 +119,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
     @SuppressLint("LongLogTag")
     override fun showList(data: SpecailRadioBean?): Unit =//专辑列表
             if (data != null && data.data != null) {
+                var positionNum: Int? = 0
                 hideLoading()
                 aRadios = data.data.list
                 val iData = SpecailRadioBean.DataBean()
@@ -128,6 +140,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                             for (j in 0 until myAudioDataBean.radioAudios.size) {
                                 val musicData = Music()
                                 val raData = myAudioDataBean.radioAudios[j]
+                                if (ypId != null && !TextUtils.isEmpty(ypId) && ypId.equals(raData.id)) {
+                                    positionNum = j
+                                }
                                 musicData.isPlay = SPUtils.getPlayPosition() == j && PlayManager.isPlaying() && SPUtils.getPId() != null && !TextUtils.isEmpty(SPUtils.getPId()) && SPUtils.getPId() == musicData.artistId
                                 musicData.artist = myAudioDataBean.name
                                 musicData.artistId = loadData.id
@@ -205,6 +220,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                     }
                     if (radiosData?.musicList != null && radiosData?.musicList?.size!! > 0) {
                         musicList = radiosData?.musicList as ArrayList<Music>
+                        if (positionNum!! > 0) {
+                            SPUtils.setPlayPosition(positionNum)
+                        }
                         loadPlayData()
                     } else {
                         mPresenter?.createDB(playlist?.pid!!)
@@ -229,9 +247,11 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
 
     override fun showMusicList(data: QueryRadioAudioListBean?) =
             if (data != null && data.data != null && data.data.radioAudios != null && data.data.radioAudios.size > 0) {
+                var positionNum: Int? = 0
                 hideLoading()
                 //音乐列表
-                for (raData in data.data.radioAudios) {
+                for (i in 0 until data.data.radioAudios.size) {
+                    var raData: QueryRadioAudioListBean.DataBean.RadioAudiosBean = data.data.radioAudios[i]
                     val newData = Music()
                     newData.artist = playlist!!.name
                     newData.artistId = playlist!!.pid
@@ -243,6 +263,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                     newData.date = raData.createTime
                     newData.year = raData.playTime
                     newData.isLove = raData.isHasFavorite
+                    if (ypId != null && !TextUtils.isEmpty(ypId) && ypId.equals(raData.id)) {
+                        positionNum = i
+                    }
                     val list = raData.lyricJson.list
                     if (list != null) {
                         for (i in list.indices) {
@@ -260,6 +283,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                     musicList.add(newData)
                 }
                 if (musicList != null && musicList.size > 0) {
+                    if (positionNum!! > 0) {
+                        SPUtils.setPlayPosition(positionNum)
+                    }
                     loadPlayData()
                 } else {
                     ToastUtils.show("网络异常，请重新尝试！")
@@ -279,6 +305,10 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
     private var coverAnimator: ObjectAnimator? = null
     private var musicList = ArrayList<Music>()
     private var playlist = Playlist()
+
+    var dtId: String? = null
+    var ypId: String? = null
+
     override fun showNowPlaying(music: Music?) {
         if (music != null) {
             playingMusic = music
@@ -350,11 +380,21 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
             finish()
             return
         }
+        dtId = intent.extras.getString("xj_dtId")
+        ypId = intent.extras.getString("xj_ypId")
+        if (!TextUtils.isEmpty(dtId)) {
+            SPUtils.setPid(dtId)
+            if (TextUtils.isEmpty(ypId)) {
+                //第二种情况 只指定了专辑ID默认播放第一个音频
+                SPUtils.setPlayPosition(0)
+            }
+        }
         if (sId != null && !TextUtils.isEmpty(sId)) {
             mPresenter?.getMusicListDB(SPUtils.getPId(), position, namid)
         } else
             mPresenter!!.loadSpeData(true)
     }
+
 
     @SuppressLint("LongLogTag")
     override fun initData() {
@@ -406,6 +446,8 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)//must store the new intent unless getIntent() will return the old one
+        ypId = ""
+        dtId = ""
         initData()
     }
 

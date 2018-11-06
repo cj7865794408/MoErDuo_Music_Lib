@@ -255,11 +255,13 @@ object NavigationHelper {
         }
     }
 
-    fun navigateToPlaying(context: Activity, transitionView: View? = null, token: String?, id: String?,serviceId:String?) {
+    fun navigateToPlaying(context: Activity, transitionView: View? = null, token: String?, id: String?,serviceId:String?,dtId:String?,ypId:String?) {
         val intent = Intent(context, PlayerActivity::class.java)
         intent.putExtra("xj_token", token)
         intent.putExtra("xj_sid", id)
         intent.putExtra("xj_serviceid",serviceId)
+        intent.putExtra("xj_dtId",dtId)
+        intent.putExtra("xj_ypId",ypId)
         if (transitionView != null) {
             val compat = ActivityOptionsCompat.makeScaleUpAnimation(transitionView,
                     transitionView.width / 2, transitionView.height / 2, 0, 0)
@@ -270,7 +272,6 @@ object NavigationHelper {
             context.startActivity(intent)
         }
     }
-
     fun getNowPlayingIntent(context: Context): Intent {
         val intent = Intent(context, MainActivity::class.java)
         intent.action = Constants.DEAULT_NOTIFICATION

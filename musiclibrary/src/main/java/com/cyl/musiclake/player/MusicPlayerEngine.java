@@ -101,11 +101,13 @@ public class MusicPlayerEngine implements MediaPlayer.OnErrorListener,
 
 
     public void release() {
+        if(mCurrentMediaPlayer!=null)
         mCurrentMediaPlayer.release();
     }
 
 
     public void pause() {
+        if(mCurrentMediaPlayer!=null)
         mCurrentMediaPlayer.pause();
     }
 

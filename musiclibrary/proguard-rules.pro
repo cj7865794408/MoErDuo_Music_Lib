@@ -99,9 +99,6 @@
 -keep public class * extends android.support.v7.**
 -keep public class * extends android.support.annotation.**
 
-#-keep public class * extends java.lang.annotation.Annotation {
-#  *;
-#}
 #表示不混淆任何包含native方法的类的类名以及native方法名，这个和我们刚才验证的结果是一致
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -226,9 +223,6 @@
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }
 
-#-keep public class *extends java.lang.annotation.Annotation {
-#  *;
-#}
 #
 # ----------------------------- 第三方 -----------------------------
 #
