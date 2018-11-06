@@ -75,14 +75,14 @@
 
             </LinearLayout>
 
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/searchLyricIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_16"
                 android:contentDescription="@string/search_lyric"
                 android:src="@drawable/ic_search_lyric"
-                android:visibility="gone" />
+                android:visibility="gone" />-->
 
             <TextView
                 android:id="@+id/searchLyricIv_text"
@@ -233,7 +233,8 @@
                         android:background="?android:attr/selectableItemBackgroundBorderless"
                         android:scaleType="fitXY"
                         app:anim_duration="300"
-                        app:elevation="10dp" />
+                        app:elevation="10dp"
+                        tools:ignore="NewApi" />
 
 
                     <ProgressBar
@@ -259,7 +260,8 @@
                     android:visibility="gone"
                     app:materialIcon="skip_next"
                     app:materialIconColor="@color/white"
-                    app:materialIconSize="32dp" />
+                    app:materialIconSize="32dp"
+                    tools:ignore="NewApi" />
 
                 <ImageView
                     android:id="@+id/nextPlayIv"
@@ -300,7 +302,8 @@
                     android:gravity="center"
                     android:onClick="changePlayMode"
                     android:src="@drawable/ic_repeat_new"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:ignore="NewApi" />
 
             </LinearLayout>
 
@@ -341,7 +344,8 @@
                     android:onClick="shareMusic"
                     app:materialIcon="share"
                     app:materialIconColor="@color/white"
-                    app:materialIconSize="24dp" />
+                    app:materialIconSize="24dp"
+                    tools:ignore="NewApi" />
 
                 <ImageView
                     android:id="@+id/equalizerIv"
@@ -353,7 +357,8 @@
                     android:contentDescription="@string/equalizer"
                     android:gravity="center"
                     android:src="@drawable/ic_equalizer"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:ignore="NewApi,VectorDrawableCompat" />
 
                 <net.steamcrafted.materialiconlib.MaterialIconView
                     android:id="@+id/playlistAddIv"

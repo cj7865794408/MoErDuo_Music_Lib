@@ -38,7 +38,6 @@ import com.cyl.musiclake.ui.OnlinePlaylistUtils
 import com.cyl.musiclake.ui.UIUtils
 import com.cyl.musiclake.ui.downloadMusic
 import com.cyl.musiclake.ui.main.SpecialActivity
-import com.cyl.musiclake.ui.music.dialog.MusicLyricDialog
 import com.cyl.musiclake.ui.music.local.adapter.MyPagerAdapter
 import com.cyl.musiclake.ui.music.playqueue.PlayQueueDialog
 import com.cyl.musiclake.utils.*
@@ -621,27 +620,27 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         }
         mLyricView?.setLyricContent(lyric)
 
-        searchLyricIv.setOnClickListener {
-            MusicLyricDialog().apply {
-                if (playingMusic != null) {
-                    title = playingMusic?.title
-                    artist = playingMusic?.artist
-                    duration = PlayManager.getDuration().toLong()
-                    searchListener = {
-                    }
-                    textSizeListener = {
-                        mLyricView?.setTextSize(it)
-                    }
-                    textColorListener = {
-                        mLyricView?.setHighLightTextColor(it)
-                    }
-                    lyricListener = {
-                        mLyricView?.setLyricContent(it)
-                    }
-                }
-            }.show(this)
-
-        }
+//        searchLyricIv.setOnClickListener {
+//            MusicLyricDialog().apply {
+//                if (playingMusic != null) {
+//                    title = playingMusic?.title
+//                    artist = playingMusic?.artist
+//                    duration = PlayManager.getDuration().toLong()
+//                    searchListener = {
+//                    }
+//                    textSizeListener = {
+//                        mLyricView?.setTextSize(it)
+//                    }
+//                    textColorListener = {
+//                        mLyricView?.setHighLightTextColor(it)
+//                    }
+//                    lyricListener = {
+//                        mLyricView?.setLyricContent(it)
+//                    }
+//                }
+//            }.show(this)
+//
+//        }
         searchLyricIv_text.setOnClickListener {
             val intent = Intent(context, SpecialActivity::class.java)
             startActivity(intent)
@@ -684,10 +683,10 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
             override fun onPageSelected(position: Int) {
                 LogUtil.d("PlayControlFragment", "--$position")
                 if (position == 0) {
-                    searchLyricIv.visibility = View.GONE
+//                    searchLyricIv.visibility = View.GONE
                     mLyricView?.setIndicatorShow(false)
                 } else {
-                    searchLyricIv.visibility = View.GONE
+//                    searchLyricIv.visibility = View.GONE
                 }
             }
 
