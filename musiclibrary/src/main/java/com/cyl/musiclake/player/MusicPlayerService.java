@@ -250,6 +250,7 @@ public class MusicPlayerService extends Service implements CacheListener {
                         } else {
                             mCurrentVolume = 0.2f;
                         }
+                        if(service!=null&& service.mPlayer!=null)
                         service.mPlayer.setVolume(mCurrentVolume);
                         break;
                     case VOLUME_FADE_UP:
@@ -259,6 +260,7 @@ public class MusicPlayerService extends Service implements CacheListener {
                         } else {
                             mCurrentVolume = 1.0f;
                         }
+                        if(service!=null&& service.mPlayer!=null)
                         service.mPlayer.setVolume(mCurrentVolume);
                         break;
                     case TRACK_WENT_TO_NEXT: //mplayer播放完毕切换到下一首
@@ -311,6 +313,7 @@ public class MusicPlayerService extends Service implements CacheListener {
                                         && mPausedByTransientLossOfFocus) {
                                     mPausedByTransientLossOfFocus = false;
                                     mCurrentVolume = 0f;
+                                    if(service!=null&& service.mPlayer!=null)
                                     service.mPlayer.setVolume(mCurrentVolume);
                                     mMainHandler.post(service::play);
                                 } else {
@@ -582,6 +585,7 @@ public class MusicPlayerService extends Service implements CacheListener {
                         mPlayingMusic = result;
                         saveHistory();
                         isMusicPlaying = true;
+                        if(mPlayer!=null)
                         mPlayer.setDataSource(mPlayingMusic.getUri());
                     }
 
@@ -603,6 +607,7 @@ public class MusicPlayerService extends Service implements CacheListener {
                 LogUtil.e(TAG, "-----" + proxyUrl);
 //                mPlayingMusic.setUri(proxyUrl);
 //            }
+                if(mPlayer!=null)
                 mPlayer.setDataSource(proxyUrl);
             }
 
@@ -616,7 +621,7 @@ public class MusicPlayerService extends Service implements CacheListener {
             intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
             sendBroadcast(intent);
 
-            if (mPlayer.isInitialized()) {
+            if (mPlayer!=null&&mPlayer.isInitialized()) {
                 mHandler.removeMessages(VOLUME_FADE_DOWN);
                 mHandler.sendEmptyMessage(VOLUME_FADE_UP); //组件调到正常音量
 
@@ -843,8 +848,8 @@ public class MusicPlayerService extends Service implements CacheListener {
                         intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
                         intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
                         sendBroadcast(intent); //由系统接收,通知系统audio_session将关闭,不再使用音效
-
-                        mPlayer.pause();
+                        if (mPlayer != null)
+                            mPlayer.pause();
                     }
                 };
                 Timer timer = new Timer();
@@ -995,6 +1000,7 @@ public class MusicPlayerService extends Service implements CacheListener {
             case PLAY_STATE_CHANGED:
                 updateWidget(PLAY_STATE_CHANGED);
                 mediaSessionManager.updatePlaybackState();
+                if(mPlayer!=null)
                 EventBus.getDefault().post(new StatusChangedEvent(mPlayer.isPrepared(), isPlaying()));
                 break;
             case PLAY_QUEUE_CLEAR:

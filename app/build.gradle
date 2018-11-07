@@ -71,9 +71,10 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-//    api(name: 'musiclibrary-release', ext: 'aar')
-//    api 'com.cyl.musiclake:xiaojia:1.0.1'
-//    implementation project(':musiclibrary')
+    //    api(name: 'musiclibrary-release', ext: 'aar')
+    //    api 'com.cyl.musiclake:xiaojia:1.0.1'
+    //    implementation project(':musiclibrary')
+    implementation project(':musiclibrary')
 }
 
 BuildJar {
