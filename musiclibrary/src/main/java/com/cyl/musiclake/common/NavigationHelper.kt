@@ -212,6 +212,7 @@ object NavigationHelper {
 
     fun navigateToPlaying(context: Activity, transitionView: View? = null) {
         val intent = Intent(context, PlayerActivity::class.java)
+        intent.putExtra("isLoad",true)
         if (transitionView != null) {
             val compat = ActivityOptionsCompat.makeScaleUpAnimation(transitionView,
                     transitionView.width / 2, transitionView.height / 2, 0, 0)
@@ -240,6 +241,7 @@ object NavigationHelper {
     fun navigateToPlaying(context: Activity, transitionView: View? = null, position: Int, playlist: ArrayList<Music>, id: String) {
         val intent = Intent(context, PlayerActivity::class.java)
         intent.putExtra("position", position)
+        intent.putExtra("isLoad",true)
         if (playlist != null && playlist.size > 0)
             intent.putExtra("playList", playlist)
         if (!TextUtils.isEmpty(id))
@@ -257,6 +259,7 @@ object NavigationHelper {
 
     fun navigateToPlaying(context: Activity, transitionView: View? = null, token: String?, id: String?,serviceId:String?,dtId:String?,ypId:String?) {
         val intent = Intent(context, PlayerActivity::class.java)
+        intent.putExtra("isLoad",true)
         intent.putExtra("xj_token", token)
         intent.putExtra("xj_sid", id)
         intent.putExtra("xj_serviceid",serviceId)

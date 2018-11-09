@@ -250,8 +250,8 @@ public class MusicPlayerService extends Service implements CacheListener {
                         } else {
                             mCurrentVolume = 0.2f;
                         }
-                        if(service!=null&& service.mPlayer!=null)
-                        service.mPlayer.setVolume(mCurrentVolume);
+                        if (service != null && service.mPlayer != null)
+                            service.mPlayer.setVolume(mCurrentVolume);
                         break;
                     case VOLUME_FADE_UP:
                         mCurrentVolume += 0.01f;
@@ -260,8 +260,8 @@ public class MusicPlayerService extends Service implements CacheListener {
                         } else {
                             mCurrentVolume = 1.0f;
                         }
-                        if(service!=null&& service.mPlayer!=null)
-                        service.mPlayer.setVolume(mCurrentVolume);
+                        if (service != null && service.mPlayer != null)
+                            service.mPlayer.setVolume(mCurrentVolume);
                         break;
                     case TRACK_WENT_TO_NEXT: //mplayer播放完毕切换到下一首
 //                        service.setAndRecordPlayPos(service.mNextPlayPos);
@@ -313,8 +313,8 @@ public class MusicPlayerService extends Service implements CacheListener {
                                         && mPausedByTransientLossOfFocus) {
                                     mPausedByTransientLossOfFocus = false;
                                     mCurrentVolume = 0f;
-                                    if(service!=null&& service.mPlayer!=null)
-                                    service.mPlayer.setVolume(mCurrentVolume);
+                                    if (service != null && service.mPlayer != null)
+                                        service.mPlayer.setVolume(mCurrentVolume);
                                     mMainHandler.post(service::play);
                                 } else {
                                     removeMessages(VOLUME_FADE_DOWN);
@@ -585,8 +585,8 @@ public class MusicPlayerService extends Service implements CacheListener {
                         mPlayingMusic = result;
                         saveHistory();
                         isMusicPlaying = true;
-                        if(mPlayer!=null)
-                        mPlayer.setDataSource(mPlayingMusic.getUri());
+                        if (mPlayer != null)
+                            mPlayer.setDataSource(mPlayingMusic.getUri());
                     }
 
                     @Override
@@ -607,8 +607,8 @@ public class MusicPlayerService extends Service implements CacheListener {
                 LogUtil.e(TAG, "-----" + proxyUrl);
 //                mPlayingMusic.setUri(proxyUrl);
 //            }
-                if(mPlayer!=null)
-                mPlayer.setDataSource(proxyUrl);
+                if (mPlayer != null)
+                    mPlayer.setDataSource(proxyUrl);
             }
 
             mediaSessionManager.updateMetaData(mPlayingMusic);
@@ -621,7 +621,7 @@ public class MusicPlayerService extends Service implements CacheListener {
             intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
             sendBroadcast(intent);
 
-            if (mPlayer!=null&&mPlayer.isInitialized()) {
+            if (mPlayer != null && mPlayer.isInitialized()) {
                 mHandler.removeMessages(VOLUME_FADE_DOWN);
                 mHandler.sendEmptyMessage(VOLUME_FADE_UP); //组件调到正常音量
 
@@ -1000,8 +1000,8 @@ public class MusicPlayerService extends Service implements CacheListener {
             case PLAY_STATE_CHANGED:
                 updateWidget(PLAY_STATE_CHANGED);
                 mediaSessionManager.updatePlaybackState();
-                if(mPlayer!=null)
-                EventBus.getDefault().post(new StatusChangedEvent(mPlayer.isPrepared(), isPlaying()));
+                if (mPlayer != null)
+                    EventBus.getDefault().post(new StatusChangedEvent(mPlayer.isPrepared(), isPlaying()));
                 break;
             case PLAY_QUEUE_CLEAR:
             case PLAY_QUEUE_CHANGE:
@@ -1126,13 +1126,13 @@ public class MusicPlayerService extends Service implements CacheListener {
                 ? R.drawable.ic_pause : R.drawable.ic_play;
 
         Intent nowPlayingIntent = new Intent(this, PlayerActivity.class);
+        nowPlayingIntent.putExtra("isLoad", false);
         nowPlayingIntent.setAction(Constants.DEAULT_NOTIFICATION);
         PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         if (mNotificationPostTime == 0) {
             mNotificationPostTime = System.currentTimeMillis();
         }
         mNotificationBuilder = new Builder(this, initChannelId())
-                .setSmallIcon(R.drawable.ic_icon)
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTitle())
                 .setContentText(text)
@@ -1142,22 +1142,22 @@ public class MusicPlayerService extends Service implements CacheListener {
                 .addAction(R.drawable.ic_skip_next,
                         "",
                         retrievePlaybackAction(ACTION_NEXT))
-                .addAction(R.drawable.ic_lyric,
-                        "",
-                        retrievePlaybackAction(ACTION_LYRIC))
                 .addAction(R.drawable.ic_clear,
                         "",
                         retrievePlaybackAction(ACTION_CLOSE))
                 .setDeleteIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(
                         this, PlaybackStateCompat.ACTION_STOP));
 
-
+        if (SystemUtils.isLollipop()) {
+            mNotificationBuilder.setSmallIcon(R.drawable.ic_icon);
+        }
         if (SystemUtils.isJellyBeanMR1()) {
             mNotificationBuilder.setShowWhen(false);
         }
         if (SystemUtils.isLollipop()) {
             //线控
             isRunningForeground = true;
+
             mNotificationBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
             NotificationCompat.MediaStyle style = new NotificationCompat.MediaStyle()
                     .setMediaSession(mediaSessionManager.getMediaSession())

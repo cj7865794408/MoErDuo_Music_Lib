@@ -215,7 +215,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                         playlist!!.pid = it?.id
                         playlist!!.name = it?.name
                         playlist!!.coverUrl = it?.img
-                        playlist!!.count = it?.radioAudioCount?.toLong()!!
+                        playlist!!.count = it?.radioAudioCount.toLong()
                     }
                     if (radiosData?.musicList != null && radiosData?.musicList?.size!! > 0) {
                         musicList = radiosData?.musicList as ArrayList<Music>
@@ -262,6 +262,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                     newData.date = raData.createTime
                     newData.year = raData.playTime
                     newData.isLove = raData.isHasFavorite
+                    newData.trackNumber = playlist.count.toInt()
                     if (ypId != null && !TextUtils.isEmpty(ypId) && ypId.equals(raData.id)) {
                         positionNum = i
                     }
@@ -365,22 +366,33 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
      */
     private fun initPlayData() {
         var sId = SPUtils.getPId()
-        var namid = intent.extras.getString("nameid")
-        var position = intent.extras.getInt("position")
+        var isbundle: Boolean? = intent.hasExtra("nameid")
+        var namid: String? = null
+        var position: Int? = 0
+        if (isbundle!!) {
+            namid = intent.extras.getString("nameid")
+            position = intent.extras.getInt("position")
+        }
         if (namid != null) {
             musicList = intent.extras.get("playList") as ArrayList<Music>
         } else {
-            SPUtils.setXiaoJiaToken(intent.extras.getString("xj_token"))
-            SPUtils.setStudentId(intent.extras.getString("xj_sid"))
-            SPUtils.setServiceId(intent.extras.getString("xj_serviceid"))
+            var isbundle: Boolean? = intent.hasExtra("xj_token")
+            if (isbundle!!) {
+                SPUtils.setXiaoJiaToken(intent.extras.getString("xj_token"))
+                SPUtils.setStudentId(intent.extras.getString("xj_sid"))
+                SPUtils.setServiceId(intent.extras.getString("xj_serviceid"))
+            }
         }
         if (SPUtils.getXiaoJiaToken() == null) {
             ToastUtils.show("參數異常，token爲空！")
             finish()
             return
         }
-        dtId = intent.extras.getString("xj_dtId")
-        ypId = intent.extras.getString("xj_ypId")
+        var ishasId: Boolean? = intent.hasExtra("xj_dtId")
+        if (ishasId!!) {
+            dtId = intent.extras.getString("xj_dtId")
+            ypId = intent.extras.getString("xj_ypId")
+        }
         if (!TextUtils.isEmpty(dtId)) {
             SPUtils.setPid(dtId)
             if (TextUtils.isEmpty(ypId)) {
@@ -445,9 +457,11 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)//must store the new intent unless getIntent() will return the old one
-        ypId = ""
-        dtId = ""
-        initData()
+        if (intent?.extras?.getBoolean("isLoad")!!) {
+            ypId = ""
+            dtId = ""
+            initData()
+        }
     }
 
     override fun listener() {
@@ -544,13 +558,15 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
 
     override fun updatePlayStatus(isPlaying: Boolean) {
         if (isPlaying) {
-            playPauseIv.play()
+//            playPauseIv.play()
+            playPauseIv.setBackgroundResource(R.mipmap.pause_true_icon)
             coverAnimator?.isStarted?.let {
                 if (it) coverAnimator?.resume() else coverAnimator?.start()
             }
         } else {
             coverAnimator?.pause()
-            playPauseIv.pause()
+            playPauseIv.setBackgroundResource(R.mipmap.play_true_icon)
+//            playPauseIv.pause()
         }
     }
 
@@ -593,10 +609,10 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
 //        nextPlayIv.setColor(blackWhiteColor)
         backIv.setColorFilter(blackWhiteColor)
 //        playQueueIv.setColor(blackWhiteColor)
-        downloadIv.setColor(blackWhiteColor)
-        shareIv.setColor(blackWhiteColor)
-        playlistAddIv.setColor(blackWhiteColor)
-        playPauseIv.btnColor = blackWhiteColor
+//        downloadIv.setColor(blackWhiteColor)
+//        shareIv.setColor(blackWhiteColor)
+//        playlistAddIv.setColor(blackWhiteColor)
+//        playPauseIv.btnColor = blackWhiteColor
     }
 
     override fun showLyric(lyric: String?, init: Boolean) {
@@ -792,7 +808,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun updatePlayStatus(event: StatusChangedEvent) {
-        playPauseIv.setLoading(!event.isPrepared)
+//        playPauseIv.setLoading(!event.isPrepared)
         updatePlayStatus(event.isPlaying)
     }
 
