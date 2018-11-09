@@ -760,7 +760,10 @@ public class MusicPlayerService extends Service implements CacheListener {
 
     public int getAudioSessionId() {
         synchronized (this) {
-            return mPlayer.getAudioSessionId();
+            if (mPlayer != null) {
+                return mPlayer.getAudioSessionId();
+            }
+            return 0;
         }
     }
 
