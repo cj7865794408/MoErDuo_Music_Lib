@@ -822,7 +822,7 @@ public class MusicPlayerService extends Service implements CacheListener {
         if (isPlaying()) {
             pause();
         } else {
-            if (mPlayer.isInitialized()) {
+            if (mPlayer!=null&&mPlayer.isInitialized()) {
                 play();
             } else {
                 isMusicPlaying = true;
