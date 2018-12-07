@@ -154,13 +154,15 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                                 musicData.date = raData.createTime
                                 musicData.year = raData.playTime
                                 musicData.isLove = true
-                                val list = raData.lyricJson.list
-                                if (list != null) {
-                                    for (k in list.indices) {
-                                        val da = list[k]
-                                        da.lrcTime = UIUtils.hmTime(da.time)
+                                if (raData.lyricJson != null) {
+                                    val list = raData.lyricJson.list
+                                    if (list != null) {
+                                        for (k in list.indices) {
+                                            val da = list[k]
+                                            da.lrcTime = UIUtils.hmTime(da.time)
+                                        }
+                                        musicData.lrcList = list
                                     }
-                                    musicData.lrcList = list
                                 }
                                 val lyric = StringBuffer()
                                 if (musicData.lrcList != null) {
@@ -201,7 +203,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                             }
                         }
                     } else {
-                        if (aRadios!![0].radios.size > 0)
+                        if (aRadios!![0].radios != null && aRadios!![0].radios.size > 0)
                             radiosData = aRadios!![0].radios[0]
                     }
                 } else {
@@ -266,16 +268,18 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                     if (ypId != null && !TextUtils.isEmpty(ypId) && ypId.equals(raData.id)) {
                         positionNum = i
                     }
-                    val list = raData.lyricJson.list
-                    if (list != null) {
-                        for (i in list.indices) {
-                            val da = list[i]
-                            da.lrcTime = hmTime(da.time)
+                    if (raData.lyricJson != null) {
+                        val list = raData.lyricJson.list
+                        if (list != null) {
+                            for (i in list.indices) {
+                                val da = list[i]
+                                da.lrcTime = hmTime(da.time)
+                            }
+                            newData.lrcList = list
                         }
-                        newData.lrcList = list
                     }
                     val lyric = StringBuilder()
-                    newData.lrcList!!.forEach {
+                    newData.lrcList?.forEach {
                         lyric.append("[" + it.lrcTime + ", " + it.info.replace("\r", "") + "]")
                         lyric.append("\n")
                     }
