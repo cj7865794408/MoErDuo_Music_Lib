@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-<<<<<<< HEAD
-    android:layout_height="35dp"
-=======
     android:layout_height="38dp"
->>>>>>> 5a79ae93fb815d30bcdec2e6d0cf3e88cc7f08b6
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal"
@@ -54,11 +50,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="35dp">
-=======
         android:layout_height="wrap_content">
->>>>>>> 5a79ae93fb815d30bcdec2e6d0cf3e88cc7f08b6
 
         <ImageView
             android:id="@+id/iv_resource"
@@ -73,7 +66,6 @@
             android:src="@drawable/lottery_animlist"
             android:textColor="@color/white"
             android:visibility="gone" />
-<<<<<<< HEAD
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -81,9 +73,6 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:background="@color/divider_line"></View>
-=======
-
->>>>>>> 5a79ae93fb815d30bcdec2e6d0cf3e88cc7f08b6
     </RelativeLayout>
 
 
@@ -105,12 +94,9 @@
         app:srcCompat="@drawable/ic_delete"
         tools:ignore="NotSibling" />
 
-<<<<<<< HEAD
 
-=======
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/divider_line"></View>
->>>>>>> 5a79ae93fb815d30bcdec2e6d0cf3e88cc7f08b6
 </android.support.constraint.ConstraintLayout>
