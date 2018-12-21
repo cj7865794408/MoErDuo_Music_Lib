@@ -14,7 +14,9 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.util.Pair
 import android.view.View
+import com.cyl.musiclake.MusicApp
 import com.cyl.musiclake.R
+import com.cyl.musiclake.api.LogoutCallBack
 import com.cyl.musiclake.bean.*
 import com.cyl.musiclake.download.ui.DownloadFragment
 import com.cyl.musiclake.player.MusicPlayerService
@@ -212,7 +214,7 @@ object NavigationHelper {
 
     fun navigateToPlaying(context: Activity, transitionView: View? = null) {
         val intent = Intent(context, PlayerActivity::class.java)
-        intent.putExtra("isLoad",true)
+        intent.putExtra("isLoad", true)
         if (transitionView != null) {
             val compat = ActivityOptionsCompat.makeScaleUpAnimation(transitionView,
                     transitionView.width / 2, transitionView.height / 2, 0, 0)
@@ -241,7 +243,7 @@ object NavigationHelper {
     fun navigateToPlaying(context: Activity, transitionView: View? = null, position: Int, playlist: ArrayList<Music>, id: String) {
         val intent = Intent(context, PlayerActivity::class.java)
         intent.putExtra("position", position)
-        intent.putExtra("isLoad",true)
+        intent.putExtra("isLoad", true)
         if (playlist != null && playlist.size > 0)
             intent.putExtra("playList", playlist)
         if (!TextUtils.isEmpty(id))
@@ -257,14 +259,17 @@ object NavigationHelper {
         }
     }
 
-    fun navigateToPlaying(context: Activity, transitionView: View? = null, token: String?, id: String?,serviceId:String?,dtId:String?,ypId:String?) {
+    fun navigateToPlaying(context: Activity, transitionView: View? = null, token: String?, id: String?, serviceId: String?, dtId: String?, ypId: String?, logoutCallBack: LogoutCallBack?) {
         val intent = Intent(context, PlayerActivity::class.java)
-        intent.putExtra("isLoad",true)
+
+        intent.putExtra("isLoad", true)
         intent.putExtra("xj_token", token)
         intent.putExtra("xj_sid", id)
-        intent.putExtra("xj_serviceid",serviceId)
-        intent.putExtra("xj_dtId",dtId)
-        intent.putExtra("xj_ypId",ypId)
+        intent.putExtra("xj_serviceid", serviceId)
+        intent.putExtra("xj_dtId", dtId)
+        intent.putExtra("xj_ypId", ypId)
+        if (MusicApp.getInstance() != null)
+            MusicApp.getInstance().logoutCallBack = logoutCallBack
         if (transitionView != null) {
             val compat = ActivityOptionsCompat.makeScaleUpAnimation(transitionView,
                     transitionView.width / 2, transitionView.height / 2, 0, 0)
@@ -275,6 +280,7 @@ object NavigationHelper {
             context.startActivity(intent)
         }
     }
+
     fun getNowPlayingIntent(context: Context): Intent {
         val intent = Intent(context, MainActivity::class.java)
         intent.action = Constants.DEAULT_NOTIFICATION

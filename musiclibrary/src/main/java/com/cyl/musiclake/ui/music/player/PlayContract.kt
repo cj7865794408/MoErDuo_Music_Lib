@@ -1,5 +1,6 @@
 package com.cyl.musiclake.ui.music.player
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.support.v7.graphics.Palette
@@ -43,10 +44,10 @@ interface PlayContract {
 
         fun updateNowPlaying(music: Music?)
 
-        fun loadSpeData(parentId: Boolean?)
+        fun loadSpeData(parentId: Boolean?,activity: Activity)
 
-        fun loadMusicList(aId: String)
+        fun loadMusicList(aId: String,activity:Activity)
 
-        fun loadCollect(audioId: String?, state: Int?)
+        fun loadCollect(audioId: String?, state: Int?,activity:Activity)
     }
 }

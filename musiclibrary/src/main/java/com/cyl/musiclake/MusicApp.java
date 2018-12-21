@@ -10,6 +10,7 @@ import android.support.multidex.MultiDex;
 import android.view.WindowManager;
 
 import com.cyl.musicapi.BaseApiImpl;
+import com.cyl.musiclake.api.LogoutCallBack;
 import com.cyl.musiclake.bean.HotSearchBean;
 import com.cyl.musiclake.common.Constants;
 import com.cyl.musiclake.data.PlaylistLoader;
@@ -42,7 +43,7 @@ public class MusicApp extends Application {
 
     private ApplicationComponent mApplicationComponent;
     public Point screenSize = new Point();
-
+    public LogoutCallBack logoutCallBack = null;
     public static synchronized MusicApp getInstance() {
         return sInstance;
     }
@@ -196,6 +197,5 @@ public class MusicApp extends Application {
             }
         });
     }
-
 
 }

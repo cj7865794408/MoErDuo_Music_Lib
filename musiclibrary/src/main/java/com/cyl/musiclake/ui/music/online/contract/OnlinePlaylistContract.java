@@ -1,6 +1,8 @@
 package com.cyl.musiclake.ui.music.online.contract;
 
 
+import android.app.Activity;
+
 import com.cyl.musiclake.base.BaseContract;
 import com.cyl.musiclake.bean.Music;
 import com.cyl.musiclake.bean.Playlist;
@@ -28,8 +30,8 @@ public interface OnlinePlaylistContract {
 
         void loadTopList();
 
-        void loadSpeData(Boolean parentId);
+        void loadSpeData(Boolean parentId, Activity activity);
 
-        void loadMusicList(String aId);
+        void loadMusicList(String aId, Activity activity);
     }
 }

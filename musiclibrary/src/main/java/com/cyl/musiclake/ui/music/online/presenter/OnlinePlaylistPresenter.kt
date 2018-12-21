@@ -1,5 +1,6 @@
 package com.cyl.musiclake.ui.music.online.presenter
 
+import android.app.Activity
 import android.text.TextUtils
 import android.util.Log
 import com.cyl.musiclake.api.PlaylistApiServiceImpl
@@ -16,6 +17,7 @@ import com.cyl.musiclake.net.RequestCallBack
 import com.cyl.musiclake.ui.music.online.contract.OnlinePlaylistContract
 import com.cyl.musiclake.utils.SPUtils
 import com.cyl.musiclake.utils.ToastUtils
+import com.cyl.musiclake.utils.UpdateUtils
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -31,12 +33,17 @@ import javax.inject.Inject
 class OnlinePlaylistPresenter @Inject
 constructor() : BasePresenter<OnlinePlaylistContract.View>(), OnlinePlaylistContract.Presenter {
 
-    override fun loadMusicList(aId: String?) {
+    override fun loadMusicList(aId: String?, activity: Activity) {
         mView?.showLoading()
         try {
             val observable = PlaylistApiServiceImpl.QueryRadioAudioList(aId!!)
             ApiManager.request(observable, object : RequestCallBack<QueryRadioAudioListBean> {
                 override fun success(result: QueryRadioAudioListBean) {
+                    if (result != null && result.code == -100) {
+                        //登陆身份失效
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!!",activity)
+                        mView.hideLoading()
+                    } else
                     mView?.showMusicList(result)
                 }
 
@@ -91,12 +98,17 @@ constructor() : BasePresenter<OnlinePlaylistContract.View>(), OnlinePlaylistCont
         })
     }
 
-    override fun loadSpeData(getMyFavorite: Boolean) {
+    override fun loadSpeData(getMyFavorite: Boolean, activity: Activity) {
         mView.showLoading()
         try {
             val observable = PlaylistApiServiceImpl.QueryRadioList(getMyFavorite)
             ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
                 override fun success(result: SpecailRadioBean) {
+                    if (result != null && result.code == -100) {
+                        //登陆身份失效
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!",activity)
+                        mView.hideLoading()
+                    } else
                     mView?.showList(result)
                 }
 

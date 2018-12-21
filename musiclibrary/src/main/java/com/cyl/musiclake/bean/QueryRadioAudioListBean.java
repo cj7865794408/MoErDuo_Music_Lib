@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryRadioAudioListBean implements Serializable {
-    private int code;
+    private int resultCode;
     private DataBean data;
     private boolean success;
 
     public int getCode() {
-        return code;
+        return resultCode;
     }
 
     public void setCode(int code) {
-        this.code = code;
+        this.resultCode = code;
     }
 
     public DataBean getData() {

@@ -7,8 +7,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.cyl.musiclake.MusicApp;
 import com.cyl.musiclake.bean.UpdateInfo;
 import com.cyl.musiclake.common.Constants;
 
@@ -63,6 +66,18 @@ public class UpdateUtils {
 //                         }
 //
 //                );
+    }
+
+    public static void logoutDialog(final String message,final Activity activity) {
+        if(activity==null)return;
+        new Handler(Looper.getMainLooper()).post(() ->
+                DialogUtils.showConfirmCancelDialog(activity,message));
+    }
+
+    public static void notrftyStudentApp() {
+        if (MusicApp.getInstance() != null && MusicApp.getInstance().logoutCallBack != null) {
+            MusicApp.getInstance().logoutCallBack.logoutCallBack(-100);
+        }
     }
 
     private static void updateDialog(final Activity activity, final UpdateInfo updateInfo) {

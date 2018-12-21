@@ -85,7 +85,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
             }
             loadPlayData(index, name)
         } else {
-            mPresenter!!.loadSpeData(true)
+            mPresenter!!.loadSpeData(true,this)
         }
     }
 
@@ -225,7 +225,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                         loadPlayData()
                     } else {
                         mPresenter?.createDB(playlist?.pid!!)
-                        playlist!!.pid?.let { mPresenter!!.loadMusicList(it) }
+                        playlist!!.pid?.let { mPresenter!!.loadMusicList(it,this) }
                     }!!
                 } else {
                     ToastUtils.show("暂无任何电台！")
@@ -403,7 +403,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         if (sId != null && !TextUtils.isEmpty(sId)) {
             mPresenter?.getMusicListDB(SPUtils.getPId(), position, namid)
         } else
-            mPresenter!!.loadSpeData(true)
+            mPresenter!!.loadSpeData(true,this)
     }
 
 
@@ -520,6 +520,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
      * 歌曲收藏
      */
     fun collectMusic(view: View?) {
+//        UpdateUtils.logoutDialog("测试")
         if (playingMusic != null) {
             showLoading()
             UIUtils.collectMusic(view as ImageView, playingMusic)
@@ -788,9 +789,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         when (event.type) {
             Constants.PLAYLIST_LOVE_ID -> {
                 if (!event?.music?.isLove!!) {
-                    mPresenter?.loadCollect(event?.music?.mid!!, 0)
+                    mPresenter?.loadCollect(event?.music?.mid!!, 0,this)
                 } else {
-                    mPresenter?.loadCollect(event?.music?.mid!!, 1)
+                    mPresenter?.loadCollect(event?.music?.mid!!, 1,this)
                 }
             }
         }

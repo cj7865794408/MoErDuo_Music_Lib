@@ -1,6 +1,7 @@
 package com.cyl.musiclake.ui.music.player
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.support.v7.graphics.Palette
 import android.text.TextUtils
 import android.util.Log
@@ -20,6 +21,7 @@ import com.cyl.musiclake.player.playback.PlayProgressListener
 import com.cyl.musiclake.utils.CoverLoader
 import com.cyl.musiclake.utils.ImageUtils
 import com.cyl.musiclake.utils.ToastUtils
+import com.cyl.musiclake.utils.UpdateUtils
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import javax.inject.Inject
@@ -31,13 +33,18 @@ import javax.inject.Inject
 
 class PlayPresenter @Inject
 constructor() : BasePresenter<PlayContract.View>(), PlayContract.Presenter, PlayProgressListener {
-    override fun loadCollect(id: String?, state: Int?) {
+    override fun loadCollect(id: String?, state: Int?, activity: Activity) {
         mView.showLoading()
         try {
             val observable = PlaylistApiServiceImpl.StudentAddAudioToFavorite(id!!, state!!)
             ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
                 override fun success(result: SpecailRadioBean) {
-                    mView?.isCollect(result)
+                    if (result != null && result.code == -100) {
+                        //登陆身份失效.
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!",activity)
+                        mView.hideLoading()
+                    } else
+                        mView?.isCollect(result)
                 }
 
                 override fun error(msg: String) {
@@ -52,13 +59,18 @@ constructor() : BasePresenter<PlayContract.View>(), PlayContract.Presenter, Play
 
     }
 
-    override fun loadSpeData(getMyFavorite: Boolean?) {
+    override fun loadSpeData(getMyFavorite: Boolean?, activity: Activity) {
         mView.showLoading()
         try {
             val observable = PlaylistApiServiceImpl.QueryRadioList(getMyFavorite!!)
             ApiManager.request(observable, object : RequestCallBack<SpecailRadioBean> {
                 override fun success(result: SpecailRadioBean) {
-                    mView?.showList(result)
+                    if (result != null && result.code == -100) {
+                        //登陆身份失效
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!",activity)
+                        mView.hideLoading()
+                    } else
+                        mView?.showList(result)
                 }
 
                 override fun error(msg: String) {
@@ -72,14 +84,19 @@ constructor() : BasePresenter<PlayContract.View>(), PlayContract.Presenter, Play
         }
     }
 
-    override fun loadMusicList(aId: String) {
+    override fun loadMusicList(aId: String, activity: Activity) {
         mView?.showLoading()
 
         try {
             val observable = PlaylistApiServiceImpl.QueryRadioAudioList(aId!!)
             ApiManager.request(observable, object : RequestCallBack<QueryRadioAudioListBean> {
                 override fun success(result: QueryRadioAudioListBean) {
-                    mView?.showMusicList(result)
+                    if (result != null && result.code == -100) {
+                        //登陆身份失效
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!",activity)
+                        mView.hideLoading()
+                    } else
+                        mView?.showMusicList(result)
                 }
 
                 override fun error(msg: String) {

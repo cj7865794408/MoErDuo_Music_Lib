@@ -11,7 +11,7 @@ public class SpecailRadioBean implements Serializable {
      * success : true
      */
 
-    private int code;
+    private int resultCode;
     private ListDataBean data;
     private boolean success;
     private String message;
@@ -25,11 +25,11 @@ public class SpecailRadioBean implements Serializable {
     }
 
     public int getCode() {
-        return code;
+        return resultCode;
     }
 
     public void setCode(int code) {
-        this.code = code;
+        this.resultCode = code;
     }
 
     public ListDataBean getData() {

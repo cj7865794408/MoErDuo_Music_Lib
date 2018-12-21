@@ -1,11 +1,15 @@
 package com.cyl.musiclake.utils;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import com.cyl.musiclake.utils.LogUtil;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.cyl.musiclake.R;
 
 /**
  * Created by master on 2018/4/7.
@@ -40,16 +44,42 @@ public class DialogUtils {
                 .create();
     }
 
-    public static AlertDialog showConfirmCancelDialog(Context context,
-                                                      String title, String message,
-                                                      DialogInterface.OnClickListener posListener) {
-        AlertDialog dlg = new AlertDialog.Builder(context).setMessage(message)
-                .setPositiveButton("确认", posListener)
-                .setNegativeButton("取消", null).create();
-        dlg.setCanceledOnTouchOutside(false);
-        dlg.show();
-        return dlg;
+    public static void showConfirmCancelDialog(Context context, String message) {
+//        AlertDialog dlg = new AlertDialog.Builder(context).setMessage(message)
+//                .setPositiveButton("确认", posListener)
+//                .setNegativeButton("取消", null).create();
+//        dlg.setCanceledOnTouchOutside(false);
+//        dlg.show();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = View
+                .inflate(context, R.layout.login_custom_dialog, null);
+        builder.setView(view);
+        builder.setCancelable(true);
+        //取消或确定按钮监听事件处理
+        AlertDialog dialog = builder.create();
+        TextView title_v= (TextView) view
+                .findViewById(R.id.title);//设置标题
+        TextView input_edt= (TextView) view
+                .findViewById(R.id.dialog_edit);//输入内容
+        Button btn_cancel=(Button)view
+                .findViewById(R.id.btn_cancel);//取消按钮
+        Button btn_comfirm=(Button)view
+                .findViewById(R.id.btn_comfirm);//确定按钮
+        title_v.setText("系统提示");
+        input_edt.setText(""+message);
+        btn_cancel.setOnClickListener(view1 -> dialog.dismiss());
+        btn_comfirm.setOnClickListener(view12 -> {
+            dialog.dismiss();
+            UpdateUtils.notrftyStudentApp();
+            ((Activity) context).finish();
+
+        });
+        dialog.show();
+
     }
+
+
 
     public static final void dismissDialog() {
         if (mProgressDialog != null) {

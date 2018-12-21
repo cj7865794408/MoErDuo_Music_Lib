@@ -115,7 +115,7 @@ public class MedMusicListAcitivty extends BaseActivity<OnlinePlaylistPresenter> 
                 medMusicAdapter.setNewData(musicList);
                 loadHeader();
             } else {
-                mPresenter.loadMusicList(radiosData.getId());
+                mPresenter.loadMusicList(radiosData.getId(),this);
             }
         }
     }
@@ -287,7 +287,7 @@ public class MedMusicListAcitivty extends BaseActivity<OnlinePlaylistPresenter> 
         currtMusicList = musicList;
         speCardId.setVisibility(View.VISIBLE);
         speMusicName.setText(currtMusicData.getTitle() + "");
-        speMusicDes.setText("当前专辑共" + currtMusicData.getTrackNumber() + "首歌");
+        speMusicDes.setText("当前播放专辑 <<" + currtMusicData.getArtist()+">>");
         if (PlayManager.isPlaying()) {
             spePlayId.setBackgroundResource(R.drawable.green_pause_icon);
         } else {

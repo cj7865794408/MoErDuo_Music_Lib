@@ -78,7 +78,7 @@ public class SpecialActivity extends BaseActivity<OnlinePlaylistPresenter> imple
 
     @Override
     protected void initData() {
-        mPresenter.loadSpeData(true);
+        mPresenter.loadSpeData(true,this);
     }
 
     @Override
@@ -256,7 +256,7 @@ public class SpecialActivity extends BaseActivity<OnlinePlaylistPresenter> imple
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMeLoveState(InfoChangeEvent playlistEvent) {
-        mPresenter.loadSpeData(true);
+        mPresenter.loadSpeData(true,this);
     }
 
     @Override

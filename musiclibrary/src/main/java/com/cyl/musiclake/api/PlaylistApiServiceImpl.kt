@@ -279,12 +279,16 @@ object PlaylistApiServiceImpl {
                     val json = it.string()
                     val info = Gson().fromJson<SpecailRadioBean>(json.toString(), SpecailRadioBean::class.java)
                     Observable.create(ObservableOnSubscribe<SpecailRadioBean> {
-                        if (info.isSuccess) {
+//                        if (info.isSuccess) {
                             it.onNext(info)
                             it.onComplete()
-                        } else {
-                            it.onError(Throwable("网络异常"))
-                        }
+//                        } else {
+//                            if (info != null && info.code == -100) {
+//                                //登陆身份失效
+//                                UpdateUtils.logoutDialog("账号已在其他设备登录,请重新登录!")
+//                            } else
+//                                it.onError(Throwable("网络异常"))
+//                        }
                     })
                 }
     }
@@ -304,12 +308,16 @@ object PlaylistApiServiceImpl {
                     val json = it.string()
                     val info = Gson().fromJson<SpecailRadioBean>(json.toString(), SpecailRadioBean::class.java)
                     Observable.create(ObservableOnSubscribe<SpecailRadioBean> {
-                        if (info.isSuccess) {
+//                        if (info.isSuccess) {
                             it.onNext(info)
                             it.onComplete()
-                        } else {
-                            it.onError(Throwable("网络异常"))
-                        }
+//                        } else {
+//                            if (info != null && info.code == -100) {
+//                                //登陆身份失效.
+//                                UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!")
+//                            } else
+//                                it.onError(Throwable("网络异常"))
+//                        }
                     })
                 }
     }
@@ -324,12 +332,16 @@ object PlaylistApiServiceImpl {
                     val json = it.string()
                     val info = Gson().fromJson<QueryRadioAudioListBean>(json.toString(), QueryRadioAudioListBean::class.java)
                     Observable.create(ObservableOnSubscribe<QueryRadioAudioListBean> {
-                        if (info.isSuccess) {
+//                        if (info.isSuccess) {
                             it.onNext(info)
                             it.onComplete()
-                        } else {
-                            it.onError(Throwable("网络异常"))
-                        }
+//                        } else {
+//                            if (info != null && info.code == -100) {
+//                                //登陆身份失效
+//                                UpdateUtils.logoutDialog("账号已在其他设备登录,请重新登录!")
+//                            } else
+//                                it.onError(Throwable("网络异常"))
+//                        }
                     })
                 }
     }
