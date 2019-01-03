@@ -94,6 +94,8 @@ public abstract class BaseActivity<T extends BaseContract.BasePresenter> extends
         //取消状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // 把actvity放到application栈中管理
+        AppManager.getAppManager().addActivity(this);
         mToken = PlayManager.bindToService(this, this);
         setContentView(getLayoutResID());
         mHandler = new Handler();

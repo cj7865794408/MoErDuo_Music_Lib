@@ -68,10 +68,9 @@ public class UpdateUtils {
 //                );
     }
 
-    public static void logoutDialog(final String message,final Activity activity) {
-        if(activity==null)return;
+    public static void logoutDialog(final String message) {
         new Handler(Looper.getMainLooper()).post(() ->
-                DialogUtils.showConfirmCancelDialog(activity,message));
+                DialogUtils.showConfirmCancelDialog(message));
     }
 
     public static void notrftyStudentApp() {

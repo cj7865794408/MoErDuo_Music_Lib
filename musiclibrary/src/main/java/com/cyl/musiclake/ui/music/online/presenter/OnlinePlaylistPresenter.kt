@@ -41,7 +41,7 @@ constructor() : BasePresenter<OnlinePlaylistContract.View>(), OnlinePlaylistCont
                 override fun success(result: QueryRadioAudioListBean) {
                     if (result != null && result.code == -100) {
                         //登陆身份失效
-                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!!",activity)
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!!")
                         mView.hideLoading()
                     } else
                     mView?.showMusicList(result)
@@ -106,7 +106,7 @@ constructor() : BasePresenter<OnlinePlaylistContract.View>(), OnlinePlaylistCont
                 override fun success(result: SpecailRadioBean) {
                     if (result != null && result.code == -100) {
                         //登陆身份失效
-                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!",activity)
+                        UpdateUtils.logoutDialog("登录后即可使用歌曲收藏功能,请登录!")
                         mView.hideLoading()
                     } else
                     mView?.showList(result)
