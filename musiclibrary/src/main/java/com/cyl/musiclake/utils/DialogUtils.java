@@ -1,5 +1,6 @@
 package com.cyl.musiclake.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -52,10 +53,11 @@ public class DialogUtils {
 //                .setNegativeButton("取消", null).create();
 //        dlg.setCanceledOnTouchOutside(false);
 //        dlg.show();
-        if (AppManager.getAppManager().currentActivity() == null) return;
-        AlertDialog.Builder builder = new AlertDialog.Builder(AppManager.getAppManager().currentActivity());
+        Activity activity = AppManager.getAppManager().getCurrentActivity();
+        if (activity == null) return;
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         View view = View
-                .inflate(AppManager.getAppManager().currentActivity(), R.layout.login_custom_dialog, null);
+                .inflate(activity, R.layout.login_custom_dialog, null);
         builder.setView(view);
         builder.setCancelable(true);
         //取消或确定按钮监听事件处理
@@ -77,11 +79,11 @@ public class DialogUtils {
             new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if (AppManager.getAppManager().currentActivity() == null)
                         UpdateUtils.notrftyStudentApp();
                 }
             }, 500);
         });
+        if(!activity.isFinishing())
         dialog.show();
 
     }

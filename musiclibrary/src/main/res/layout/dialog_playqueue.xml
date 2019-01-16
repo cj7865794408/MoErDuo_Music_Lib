@@ -66,14 +66,8 @@
             android:layout_height="250dp"
             app:layout_behavior="@string/bottom_sheet_behavior" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider_line"
-            ></View>
         <TextView
             android:id="@+id/guanbi_id"
-
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@color/white"

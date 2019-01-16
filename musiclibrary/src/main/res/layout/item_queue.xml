@@ -67,6 +67,7 @@
             android:textColor="@color/white"
             android:visibility="gone" />
         <View
+            android:id="@+id/item_line_id"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
@@ -94,9 +95,4 @@
         app:srcCompat="@drawable/ic_delete"
         tools:ignore="NotSibling" />
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider_line"></View>
 </android.support.constraint.ConstraintLayout>

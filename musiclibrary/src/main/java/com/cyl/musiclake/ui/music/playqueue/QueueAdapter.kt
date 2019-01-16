@@ -25,6 +25,7 @@ class QueueAdapter(musicList: List<Music>) : BaseQuickAdapter<Music, BaseViewHol
     override fun convert(holder: BaseViewHolder, item: Music) {
         holder.setText(R.id.tv_title, ConvertUtils.getTitle(item.title))
         holder.setText(R.id.tv_artist, ConvertUtils.getArtistAndAlbum(item.artist, item.album))
+        holder.getView<View>(R.id.item_line_id).visibility= View.VISIBLE
         holder.setImageResource(R.id.iv_resource, R.drawable.lottery_animlist)
         var animimo = ImageUtils.getAnimationDrawable(holder.getView<View>(R.id.iv_resource) as ImageView?)
         holder.getView<View>(R.id.iv_resource).visibility = View.VISIBLE

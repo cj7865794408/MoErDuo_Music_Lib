@@ -3,11 +3,8 @@ package com.cyl.musiclake.ui.music.playqueue
 import android.text.TextUtils
 import com.cyl.musiclake.base.BasePresenter
 import com.cyl.musiclake.bean.Music
-import com.cyl.musiclake.data.db.DaoLitepal
 import com.cyl.musiclake.player.PlayManager
 import com.cyl.musiclake.utils.SPUtils
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import javax.inject.Inject
 
 
@@ -31,15 +28,11 @@ constructor() : BasePresenter<PlayQueueContract.View>(), PlayQueueContract.Prese
             mView.showEmptyView()
             return
         }
-        doAsync {
-            var data: List<Music> = DaoLitepal.getNewMusicList(SPUtils.getPId()!!)
-            uiThread {
-                if (data != null && data.isNotEmpty() && !TextUtils.isEmpty(SPUtils.getPId())) {
-                    mView.showSongs(data)
-                } else {
-                    mView.showEmptyView()
-                }
-            }
+        var data: List<Music> = PlayManager.getPlayList()
+        if (data != null && data.isNotEmpty() && !TextUtils.isEmpty(SPUtils.getPId())) {
+            mView.showSongs(data)
+        } else {
+            mView.showEmptyView()
         }
     }
 

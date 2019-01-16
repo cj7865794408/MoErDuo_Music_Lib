@@ -162,18 +162,20 @@ app:layout_behavior="@string/appbar_scrolling_view_behavior">
                 android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/playQueueIv"
                     android:layout_width="50dp"
                     android:layout_height="75dp"
+                    android:onClick="openPlayQueue"
                     android:layout_weight="1">
 
                     <ImageView
-                        android:id="@+id/playQueueIv"
+
                         android:layout_width="30dp"
                         android:layout_height="25dp"
                         android:layout_centerInParent="true"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/ic_detail"
-                        android:onClick="openPlayQueue" />
+                      />
                 </RelativeLayout>
 
 
