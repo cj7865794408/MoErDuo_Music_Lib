@@ -85,7 +85,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
             }
             loadPlayData(index, name)
         } else {
-            mPresenter!!.loadSpeData(true,this)
+            mPresenter!!.loadSpeData(true, this)
         }
     }
 
@@ -226,8 +226,13 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                         }
                         loadPlayData()
                     } else {
-                        mPresenter?.createDB(playlist?.pid!!)
-                        playlist!!.pid?.let { mPresenter!!.loadMusicList(it,this) }
+                        if (playlist.pid == null || TextUtils.isEmpty(playlist!!.pid)) {
+                            ToastUtils.show("暂无任何电台！")
+                            finish()
+                        } else {
+                            mPresenter?.createDB(playlist?.pid!!)
+                            playlist!!.pid?.let { mPresenter!!.loadMusicList(it, this) }
+                        }
                     }!!
                 } else {
                     ToastUtils.show("暂无任何电台！")
@@ -387,11 +392,11 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
                 SPUtils.setServiceId(intent.extras.getString("xj_serviceid"))
             }
         }
-        if (SPUtils.getXiaoJiaToken() == null) {
-            ToastUtils.show("參數異常，token爲空！")
-            finish()
-            return
-        }
+//        if (SPUtils.getXiaoJiaToken() == null) {
+//            ToastUtils.show("参数异常，token为空！")
+//            finish()
+//            return
+//        }
         var ishasId: Boolean? = intent.hasExtra("xj_dtId")
         if (ishasId!!) {
             dtId = intent.extras.getString("xj_dtId")
@@ -407,7 +412,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         if (sId != null && !TextUtils.isEmpty(sId)) {
             mPresenter?.getMusicListDB(SPUtils.getPId(), position, namid)
         } else
-            mPresenter!!.loadSpeData(true,this)
+            mPresenter!!.loadSpeData(true, this)
     }
 
 
@@ -430,6 +435,10 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         var index = SPUtils.getPlayPosition()
         if (index <= 0) {
             index = 0
+        }
+        if (musicList != null && musicList.size <= SPUtils.getPlayPosition()) {
+            index = 0
+            SPUtils.setPlayPosition(index)
         }
         PlayManager.play(index!!, musicList, musicList[index].artistId + musicList[index].id)
         setupViewPager(viewPager)
@@ -793,9 +802,9 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         when (event.type) {
             Constants.PLAYLIST_LOVE_ID -> {
                 if (!event?.music?.isLove!!) {
-                    mPresenter?.loadCollect(event?.music?.mid!!, 0,this)
+                    mPresenter?.loadCollect(event?.music?.mid!!, 0, this)
                 } else {
-                    mPresenter?.loadCollect(event?.music?.mid!!, 1,this)
+                    mPresenter?.loadCollect(event?.music?.mid!!, 1, this)
                 }
             }
         }
@@ -833,6 +842,7 @@ class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
         coverAnimator = null
         EventBus.getDefault().unregister(this)
         Constants.radiosData = null
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
