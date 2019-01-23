@@ -443,4 +443,9 @@ public class PlayControlFragment extends BaseFragment<PlayPresenter> implements 
     public void getDBMusicList(@NotNull List<Music> list, @Nullable Integer p, @Nullable String name) {
 
     }
+
+    @Override
+    public void getDBEmptyMusicList(@NotNull List<Music> list, @Nullable Integer p, @Nullable String name) {
+
+    }
 }

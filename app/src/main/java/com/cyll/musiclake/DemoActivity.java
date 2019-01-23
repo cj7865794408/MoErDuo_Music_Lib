@@ -18,9 +18,9 @@
 ////        String MEDStudentId = "bba5be2582ed4796bc00cc791521b9e5";
 ////        String url = "http://192.168.1.181:8050/ParentServer/";
 ////        String sid = "81ac4d49-f85c-4bbb-87a5-cb80185d009a";
-//        String token = "";
-//        String MEDStudentId = "";
-//        String url = "http://192.168.1.181:8050/ParentServer/";
+//        String token = "03dbaf8bc2d54776b876873f1b6d9d84";
+//        String MEDStudentId = "3bac2219cada4f94b966ffcec34489d1";
+//        String url = "http://test.api.p.ajia.cn:8080/ajiau-api/ParentServer/";
 //        String sid = "";
 //        String yid = "";
 //        NavigationHelper.INSTANCE.navigateToPlaying(this, null, token, MEDStudentId, url, sid, yid, new LogoutCallBack() {

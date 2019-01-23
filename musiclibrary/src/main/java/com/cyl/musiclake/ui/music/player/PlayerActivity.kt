@@ -53,6 +53,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class PlayerActivity : BaseActivity<PlayPresenter>(), PlayContract.View {
+    override fun getDBEmptyMusicList(list: List<Music>, p: Int?, name: String?) {
+        mPresenter!!.loadSpeData(true, this)
+    }
     override fun getDBMusicList(mlist: List<Music>, position: Int?, namid: String?) {
         var daoList: List<Music> = mlist
         if (daoList != null)

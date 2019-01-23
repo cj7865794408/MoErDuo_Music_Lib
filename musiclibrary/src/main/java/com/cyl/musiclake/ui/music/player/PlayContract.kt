@@ -38,6 +38,8 @@ interface PlayContract {
         fun isCollect(data: SpecailRadioBean)
 
         fun getDBMusicList(list: List<Music>,p:Int?,name:String?)
+
+        fun getDBEmptyMusicList(list: List<Music>,p:Int?,name:String?)
     }
 
     interface Presenter : BaseContract.BasePresenter<View> {

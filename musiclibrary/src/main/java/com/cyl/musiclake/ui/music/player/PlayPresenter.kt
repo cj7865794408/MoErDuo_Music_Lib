@@ -190,7 +190,7 @@ constructor() : BasePresenter<PlayContract.View>(), PlayContract.Presenter, Play
                     Log.e("getMusicListDB-----", data.size.toString())
                     mView?.getDBMusicList(data, p, name)
                 } else {
-                    mView?.showEmptyState()
+                   mView?.getDBEmptyMusicList(data, p, name)
                 }
             }
         }
