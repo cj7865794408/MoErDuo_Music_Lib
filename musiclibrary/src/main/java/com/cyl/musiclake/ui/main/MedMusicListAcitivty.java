@@ -115,7 +115,7 @@ public class MedMusicListAcitivty extends BaseActivity<OnlinePlaylistPresenter> 
                 medMusicAdapter.setNewData(musicList);
                 loadHeader();
             } else {
-                mPresenter.loadMusicList(radiosData.getId(),this);
+                mPresenter.loadMusicList(radiosData.getId(), this);
             }
         }
     }
@@ -256,7 +256,10 @@ public class MedMusicListAcitivty extends BaseActivity<OnlinePlaylistPresenter> 
             newData.setDate(raData.getCreateTime());
             newData.setYear(raData.getPlayTime());
             newData.setLove(raData.isHasFavorite());
-            ArrayList<QueryRadioAudioListBean.DataBean.RadioAudiosBean.LyricBaseInfoBeans> list = raData.getLyricJson().getList();
+            ArrayList<QueryRadioAudioListBean.DataBean.RadioAudiosBean.LyricBaseInfoBeans> list = new ArrayList<>();
+            if (raData.getLyricJson() != null) {
+                list = raData.getLyricJson().getList();
+            }
             if (list != null) {
                 for (int i = 0; i < list.size(); i++) {
                     QueryRadioAudioListBean.DataBean.RadioAudiosBean.LyricBaseInfoBeans da = list.get(i);
@@ -287,7 +290,7 @@ public class MedMusicListAcitivty extends BaseActivity<OnlinePlaylistPresenter> 
         currtMusicList = musicList;
         speCardId.setVisibility(View.VISIBLE);
         speMusicName.setText(currtMusicData.getTitle() + "");
-        speMusicDes.setText("当前播放专辑 <<" + currtMusicData.getArtist()+">>");
+        speMusicDes.setText("当前播放专辑 <<" + currtMusicData.getArtist() + ">>");
         if (PlayManager.isPlaying()) {
             spePlayId.setBackgroundResource(R.drawable.green_pause_icon);
         } else {
@@ -302,7 +305,7 @@ public class MedMusicListAcitivty extends BaseActivity<OnlinePlaylistPresenter> 
                 spePlayId.setBackgroundResource(R.drawable.green_play_icon);
             }
         });
-        CoverLoader.loadImageView(this,currtMusicData.getCoverUri() , speImgId);
+        CoverLoader.loadImageView(this, currtMusicData.getCoverUri(), speImgId);
         if (coverAnimator == null) {
             coverAnimator = ObjectAnimator.ofFloat(speImgId, "rotation", 0F, 359F);
             coverAnimator.setDuration(20 * 1000);
